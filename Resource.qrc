@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/man.jpg</file>
+        <file>Resources/yzm.gif</file>
+        <file>Resources/tip_close.svg</file>
+        <file>Resources/succeed_close.svg</file>
+        <file>Resources/warn_close.svg</file>
+        <file>Resources/close.svg</file>
+        <file>Resources/warn_icon.svg</file>
+        <file>Resources/close_hover.svg</file>
+    </qresource>
+</RCC>
