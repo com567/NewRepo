@@ -88,7 +88,7 @@ border-image: url(:/Resources/close.svg);
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/Resources/warn_icon.svg);</string>
+     <string notr="true">image: url(:/Resources/warn_icon.svg);</string>
     </property>
     <property name="text">
      <string/>

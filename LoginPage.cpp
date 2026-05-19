@@ -67,7 +67,11 @@ void LoginPage::on_LoginBtn1_clicked()
     NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type(i % 10));
     i++;
 
-    static MsgBox*box=new MsgBox;
+    static MsgBox* box{};
+    if (!box) {
+        box = new MsgBox(MsgBox::IconType::Error);
+
+    }
     box->show();
 
     Coating::instance()->popup(box);

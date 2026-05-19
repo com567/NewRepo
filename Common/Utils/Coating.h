@@ -24,6 +24,7 @@ protected:
 	bool eventFilter(QObject *watched, QEvent *event)override;
     void paintEvent(QPaintEvent *event)override;
 	void resizeEvent(QResizeEvent *event)override;
+	void keyPressEvent(QKeyEvent *event)override;
 private:
 	QWidget* m_viewPort{};
 	QWidget* m_popWidget{};

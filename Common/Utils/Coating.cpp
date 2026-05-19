@@ -89,3 +89,8 @@ void Coating::resizeEvent(QResizeEvent* event)
     m_popWidget->move(x,y);
 }
 
+void Coating::keyPressEvent(QKeyEvent* event)
+{
+
+}
+
