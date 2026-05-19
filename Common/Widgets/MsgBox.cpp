@@ -49,7 +49,7 @@ MsgBox::IconType MsgBox::getIconType() const
 
 void MsgBox::setText(const QString& text)
 {
-	ui->Hint_text->clear();
+    ui->Hint_text->clear();
 	ui->Hint_text->setText(text);
 }
 
@@ -60,10 +60,8 @@ QString MsgBox::getText() const
 
 void MsgBox::setIcon(const QPixmap& map)
 {
-	//先擦除掉原来的图标
-    ui->Icon->clear(); 
+    ui->Icon->clear();
     ui->Icon->setPixmap(map);
-	ui->Icon->adjustSize();
 }
 
 QPixmap MsgBox::getIcon() const

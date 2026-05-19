@@ -38,6 +38,8 @@ LoginPage::LoginPage(QWidget *parent)
 LoginPage::~LoginPage()
 {
     delete ui;
+    Coating::instance()->deleteLater();
+    NotifyTipManager::instance()->deleteLater();
 }
 
 void LoginPage::switch_interface(QWidget* w)

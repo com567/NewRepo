@@ -91,6 +91,9 @@ void Coating::resizeEvent(QResizeEvent* event)
 
 void Coating::keyPressEvent(QKeyEvent* event)
 {
-
+	  if(event->key() == Qt::Key_Escape)
+      {
+          m_popWidget->close();
+      }
 }
 

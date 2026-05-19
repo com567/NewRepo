@@ -28,6 +28,7 @@ protected:
 private:
 	QWidget* m_viewPort{};
 	QWidget* m_popWidget{};
-	QColor m_backgroundColor{205,205,205,200};
+	QWidgetSet m_widgetSet;
+	QColor m_backgroundColor{205,205,205,100};
 };
 

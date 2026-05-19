@@ -1,18 +1,18 @@
 #pragma once
 #include<iostream>
 #include<mutex>
+#include<memory>
 template<typename T>
 class Singleton
 {
 public:
-    static std::shared_ptr<T>instance()
+    static T* instance()
     {
-        static std::shared_ptr<T>ins;
-        //线程安全
-        static std::once_flag flag;               
-        std::call_once(flag,[&](){
-            ins.reset(new T());
-        });
+        static T* ins = nullptr;
+        static std::once_flag flag;
+        std::call_once(flag, []() {
+            ins = new T(); // 可传入父对象或在构造中设置 parent
+            });
         return ins;
     }
     
