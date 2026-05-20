@@ -76,6 +76,9 @@
       <height>40</height>
      </rect>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::EchoMode::Password</enum>
+    </property>
     <property name="placeholderText">
      <string>请设置新密码</string>
     </property>
@@ -88,6 +91,9 @@
       <width>340</width>
       <height>40</height>
      </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::EchoMode::Password</enum>
     </property>
     <property name="placeholderText">
      <string>请再次输入密码</string>
@@ -240,7 +246,7 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      <string>账号</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="setNew_password1_3">
+   <widget class="QLineEdit" name="Print_password">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -251,6 +257,9 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::EchoMode::Password</enum>
     </property>
     <property name="cursorPosition">
      <number>0</number>
@@ -452,6 +461,9 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
       <height>40</height>
      </rect>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::EchoMode::Password</enum>
+    </property>
     <property name="placeholderText">
      <string>密码</string>
     </property>
@@ -464,6 +476,9 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
       <width>340</width>
       <height>40</height>
      </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::EchoMode::Password</enum>
     </property>
     <property name="placeholderText">
      <string>请再次输入密码</string>

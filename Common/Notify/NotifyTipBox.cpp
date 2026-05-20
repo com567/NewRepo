@@ -20,40 +20,37 @@ NotifyTipBox::NotifyTipBox(Message_type type,QWidget* parent)
 		m_preDatas.append({
 					QPixmap(":/Resources/succeed_close.svg"),QString("登录成功"),2000
 					, QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
+		});	
+		m_preDatas.append({
+					QPixmap(":/Resources/tip_close.svg"),QString("登录失败"),2400
+					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
 		m_preDatas.append({
 					QPixmap(":/Resources/succeed_close.svg"),QString("注册成功"),2000
 					, QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
-			});
+		});
 		m_preDatas.append({
 					QPixmap(":/Resources/succeed_close.svg"),QString("修改成功"),2000
 					, QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
-			});
+		});
 
 		m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("密码错误"),2400
+					QPixmap(":/Resources/tip_close.svg"),QString("账号或密码错误"),2400
 					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
         m_preDatas.append({
 					QPixmap(":/Resources/tip_close.svg"),QString("密码至少为8位且包含大小写字母"),2400
 					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
-        m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("用户已存在"),2400
-					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
-			});
-		m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("用户不存在"),2400
-					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
-			});
 		m_preDatas.append({
 					QPixmap(":/Resources/tip_close.svg"),QString("验证码错误"),2400
 					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
-			});
-		m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("登录失败"),2400
+		});
+        m_preDatas.append({
+					QPixmap(":/Resources/tip_close.svg"),QString("两次密码输入不一致"),2400
 					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
-			});
+		});
+		
 	}
 	setMessage_type(type);
 	if (m_timerId == 0) {

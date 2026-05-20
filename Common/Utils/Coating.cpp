@@ -6,7 +6,10 @@
 
 Coating::Coating(QWidget *parent)
 	: QWidget(parent)
-{}
+{
+	setFocusPolicy(Qt::StrongFocus);
+	setFocus();
+}
 
 Coating::~Coating()
 {}
@@ -42,14 +45,13 @@ void Coating::popup(QWidget* w)
 	if(!m_viewPort)
         return;
 
-	if (m_popWidget != w)
-	{
-		w->installEventFilter(this);
-	}
+	addWidget(w);
+
 	m_popWidget = w;
 	w->setParent(this);
     w->show();
 	this->show();
+	this->setFocus();
 }
 
 bool Coating::eventFilter(QObject* watched, QEvent* event)
@@ -93,7 +95,19 @@ void Coating::keyPressEvent(QKeyEvent* event)
 {
 	  if(event->key() == Qt::Key_Escape)
       {
-          m_popWidget->close();
+          this->close();
       }
+}
+
+void Coating::addWidget(QWidget* w)
+{  
+	
+	auto it=m_widgetSet.insert(w);
+	if (it != m_widgetSet.end()) {
+         w->installEventFilter(this);
+	}
+	
+	if(m_popWidget)
+        m_popWidget->hide();
 }
 

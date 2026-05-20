@@ -3,7 +3,10 @@
 #include "Common/Widgets/ClickLabel.h"
 #include "Common/Utils/Coating.h"
 #include "Common/Widgets/MsgBox.h"
+#include <QRegularExpression>
 #include <QPainter>
+
+
 LoginPage::LoginPage(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::LoginPageClass()) 
@@ -13,7 +16,7 @@ LoginPage::LoginPage(QWidget *parent)
     ui->setupUi(this);
 
     NotifyTipManager::instance()->setViewPort(this);
-    Coating::instance()->setViewPort(this);
+    //Coating::instance()->setViewPort(this);
 
     background_ = QPixmap(":/Resources/man.jpg");
     widget=ui->LoginWiget;
@@ -38,8 +41,7 @@ LoginPage::LoginPage(QWidget *parent)
 LoginPage::~LoginPage()
 {
     delete ui;
-    Coating::instance()->deleteLater();
-    NotifyTipManager::instance()->deleteLater();
+    //Coating::instance()->deleteLater();
 }
 
 void LoginPage::switch_interface(QWidget* w)
@@ -65,26 +67,72 @@ void LoginPage::switch_interface(QWidget* w)
 
 void LoginPage::on_LoginBtn1_clicked()
 {
-    static int i = 1;
+    /*static int i = 1;
     NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type(i % 10));
     i++;
 
     static MsgBox* box{};
     if (!box) {
-        box = new MsgBox(MsgBox::IconType::Error);
+        box = new MsgBox(MsgBox::IconType::Warning);
 
     }
     box->show();
 
-    Coating::instance()->popup(box);
+    Coating::instance()->popup(box);*/
+
+    auto username=ui->User_ID_3->text().trimmed();
+    auto password=ui->Print_password->text().trimmed();
+    auto verificationCode=ui->verification_4->text().trimmed();
+    if(username.isEmpty()||password.isEmpty()||verificationCode.isEmpty())
+        NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Account_isEmpty);
+    else if(username=="admin"&&password=="917813")
+        NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_successfully);
+    else if(username!="admin"||password!="917813")
+        NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Incorrect_account_or_password);
+    else if(verificationCode!=m_Maker.createText().first)
+        NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
+    else
+        NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_failure);
+
 }
 void LoginPage::on_RegBtn1_clicked()
 {
-
+     auto username=ui->User_ID_2->text().trimmed();
+     auto password=ui->setNew_password1_2->text().trimmed();
+     auto password2=ui->setNew_password2_2->text().trimmed();
+     auto verificationCode=ui->verification_3->text().trimmed();
+     if(username.isEmpty()||password.isEmpty()||verificationCode.isEmpty())
+        NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Account_isEmpty);
+     //密码不能少于8位，且必须包含数字和大小写字母
+     else if(password.size()<8||!password.contains(QRegularExpression("[0-9]"))||!password.contains(QRegularExpression("[a-zA-Z]")))
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
+     else if(password!=password2)
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Two_password_entries);
+     else if(verificationCode!=m_Maker.createText().first)
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
+     else
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Registered_successfully);
+     
 }
 
 void LoginPage::on_affirm_clicked()
 {
+     auto username=ui->User_ID->text().trimmed();
+     auto password=ui->setNew_password1->text().trimmed();
+     auto password2=ui->setNew_password2->text().trimmed();
+     auto verificationCode=ui->verification_2->text().trimmed();
+     
+     if (username.isEmpty() || password.isEmpty() || verificationCode.isEmpty())
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Account_isEmpty);
+     //密码不能少于8位，且必须包含数字和大小写字母
+     else if (password.size() < 8 || !password.contains(QRegularExpression("[0-9]")) || !password.contains(QRegularExpression("[a-zA-Z]")))
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
+     else if (password != password2)
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Two_password_entries);
+     else if (verificationCode != m_Maker.createText().first)
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
+     else
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
 }
 
 void LoginPage::paintEvent(QPaintEvent* event)

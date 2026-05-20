@@ -2,6 +2,7 @@
 #include "NotifyTipBox.h"
 #include "LoginPage.h"
 #include "Common/Base/Singleton.hpp"
+#include <QResizeEvent>
 #include <QObject>
 
 //通知提示管理器

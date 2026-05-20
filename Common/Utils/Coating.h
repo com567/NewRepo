@@ -30,5 +30,7 @@ private:
 	QWidget* m_popWidget{};
 	QWidgetSet m_widgetSet;
 	QColor m_backgroundColor{205,205,205,100};
+	//防止出现重复添加
+	void addWidget(QWidget*w);
 };
 

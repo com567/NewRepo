@@ -22,16 +22,16 @@ class NotifyTipBox  : public QWidget
 
 public:
 	enum Message_type {
-		Account_isEmpty,
-		Login_successfully,
-		Registered_successfully,
-		modify_successfully,
-		Wrong_password,
-		Password_invalid,
-		User_exists,
-		User_Notexists,
-		VerificationCode_error,
-		Login_failure
+		Account_isEmpty,				  //输入框为空
+		Login_successfully,				  //登录成功
+		Login_failure,					  //登录失败
+		Registered_successfully,		  //注册成功
+		modify_successfully,			  //修改成功
+		Incorrect_account_or_password,	
+		Password_invalid,				  //密码无效					  
+		VerificationCode_error,			  //验证码错误
+		Two_password_entries
+		
 	};
 public:
 	NotifyTipBox(QWidget *parent=nullptr);
