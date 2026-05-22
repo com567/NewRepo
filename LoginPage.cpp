@@ -27,15 +27,23 @@ LoginPage::LoginPage(QWidget *parent)
     connect(ui->ForgetPasswordBtn, &QPushButton::clicked, this, [this] {switch_interface(ui->ForgetPassword); });
     connect(ui->RegBtn1, &QPushButton::clicked, this, [this] {});
     connect(ui->LoginBtn1, &QPushButton::clicked, this, [this] {});
-    connect(ui->verificationCode_2, &ClickLabel::clicked, this, [this] {qDebug() << "忘记密码验证码"; });
-    connect(ui->verificationCode_3, &ClickLabel::clicked, this, [this] {qDebug() << "注册验证码"; });
-    connect(ui->verificationCode_4, &ClickLabel::clicked, this, 
+    connect(ui->verificationCode_2, &ClickLabel::clicked, this,
         [this] {
-            auto pr=m_Maker.createText();
-            //qDebug() << pr.first << pr.second;
-            auto pix=m_Maker.createImage(pr.first);
-            ui->verificationCode_4->setPixmap(pix);
+            Storage_verificationCode(ui->verificationCode_2);
+            
         });
+    connect(ui->verificationCode_3, &ClickLabel::clicked, this, 
+        [this] {
+            Storage_verificationCode(ui->verificationCode_3);
+            
+        });
+    connect(ui->verificationCode_4, &ClickLabel::clicked, this,
+        [this] {
+            Storage_verificationCode(ui->verificationCode_4);
+        });
+    ui->verificationCode_4->click();
+    ui->verificationCode_3->click();
+    ui->verificationCode_2->click();
 }
 
 LoginPage::~LoginPage()
@@ -67,34 +75,23 @@ void LoginPage::switch_interface(QWidget* w)
 
 void LoginPage::on_LoginBtn1_clicked()
 {
-    /*static int i = 1;
-    NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type(i % 10));
-    i++;
-
-    static MsgBox* box{};
-    if (!box) {
-        box = new MsgBox(MsgBox::IconType::Warning);
-
-    }
-    box->show();
-
-    Coating::instance()->popup(box);*/
 
     auto username=ui->User_ID_3->text().trimmed();
     auto password=ui->Print_password->text().trimmed();
     auto verificationCode=ui->verification_4->text().trimmed();
     if(username.isEmpty()||password.isEmpty()||verificationCode.isEmpty())
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Account_isEmpty);
-    else if(username=="admin"&&password=="917813")
+    else if(username=="admin"&&password=="917813"&&verificationCode==this->verificationCode.second)
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_successfully);
     else if(username!="admin"||password!="917813")
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Incorrect_account_or_password);
-    else if(verificationCode!=m_Maker.createText().first)
+    else if(verificationCode!= this->verificationCode.second)
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
     else
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_failure);
 
 }
+
 void LoginPage::on_RegBtn1_clicked()
 {
      auto username=ui->User_ID_2->text().trimmed();
@@ -108,7 +105,7 @@ void LoginPage::on_RegBtn1_clicked()
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
      else if(password!=password2)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Two_password_entries);
-     else if(verificationCode!=m_Maker.createText().first)
+     else if(verificationCode!= this->verificationCode.second)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
      else
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Registered_successfully);
@@ -129,10 +126,17 @@ void LoginPage::on_affirm_clicked()
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
      else if (password != password2)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Two_password_entries);
-     else if (verificationCode != m_Maker.createText().first)
+     else if (verificationCode != this->verificationCode.second)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
      else
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+}
+
+void LoginPage::Storage_verificationCode(ClickLabel* label)
+{     
+        verificationCode = m_Maker.createText();     
+        auto pix = m_Maker.createImage(verificationCode.first);
+        label->setPixmap(pix);
 }
 
 void LoginPage::paintEvent(QPaintEvent* event)

@@ -8,6 +8,11 @@ ClickLabel::ClickLabel(QWidget *parent)
 ClickLabel::~ClickLabel()
 {}
 
+void ClickLabel::click()
+{
+    emit clicked();
+}
+
 void ClickLabel::mousePressEvent(QMouseEvent * event)
 {
 	if (event->button() == Qt::LeftButton) {

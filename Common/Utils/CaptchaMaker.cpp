@@ -3,13 +3,15 @@
 
 
 CaptchaMaker::CaptchaMaker()
-	:m_type(Math)
+	:m_type(VerificationCode_type(RAND(0,2)))
 {
     
 }
 
 CaptchaMaker::~CaptchaMaker()
 {}
+
+
 
 void CaptchaMaker::setType(VerificationCode_type type)
 {

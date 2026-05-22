@@ -12,6 +12,7 @@ find_package(Qt${QT_VERSION_MAJOR}
     COMPONENTS
         Core
         Gui
+        Sql
         Widgets
 )
 qt_standard_project_setup()
@@ -36,6 +37,8 @@ set(PROJECT_SOURCES
     Common/Utils/Coating.h
     Common/Utils/Coating.cpp
 
+    Dao/UserDao.h
+    Dao/UserDao.cpp
     HdyStudentManager.rc
 )
 
@@ -50,6 +53,7 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         Qt::Core
         Qt::Gui
+        Qt::Sql
         Qt::Widgets
 )
 

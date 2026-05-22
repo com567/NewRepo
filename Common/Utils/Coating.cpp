@@ -65,6 +65,10 @@ bool Coating::eventFilter(QObject* watched, QEvent* event)
 			auto resizeEvent = static_cast<QResizeEvent*>(event);
 			this->setGeometry(QRect(QPoint(0,0), resizeEvent->size()));
 		}
+		else if(event->type() == QEvent::Close)
+		{
+			this->setParent(nullptr);
+		}
 	}
 	else if(watched == m_popWidget)
 	{

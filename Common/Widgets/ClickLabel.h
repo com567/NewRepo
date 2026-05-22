@@ -8,7 +8,9 @@ class ClickLabel  : public QLabel
 public:
 	ClickLabel(QWidget *parent=nullptr);
 	~ClickLabel();
+	void click();
 protected:
+	
 	// 鼠标点击事件
     void mousePressEvent(QMouseEvent *event) override;
     // 鼠标释放事件
