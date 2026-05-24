@@ -30,6 +30,9 @@ private:
     Ui::LoginPageClass *ui;
     CaptchaMaker m_Maker;
     QPair<QString, QString>verificationCode{"",""};
+    QPair<QString, QString>new_used_password{ "","" };
+    QPair<QString, QString>account_number{ "","" };
+    QPair<QString, QString>password{ "","" };
     QString copy;
     QWidget* widget;
     QPixmap background_;

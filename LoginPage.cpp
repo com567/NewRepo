@@ -3,6 +3,8 @@
 #include "Common/Widgets/ClickLabel.h"
 #include "Common/Utils/Coating.h"
 #include "Common/Widgets/MsgBox.h"
+#include "Common/Base/Defer.hpp"
+#include "Dao/UserDao.h"
 #include <QRegularExpression>
 #include <QPainter>
 
@@ -75,59 +77,86 @@ void LoginPage::switch_interface(QWidget* w)
 
 void LoginPage::on_LoginBtn1_clicked()
 {
+    account_number.first = ui->User_ID_3->text().trimmed();
+	account_number.second = UserDao::instance()->searchUser_name(account_number.first)->userName;
+    password.first = ui->Print_password->text().trimmed();
+	password.second = UserDao::instance()->searchUser_name(account_number.first)->password;
+    auto input_verificationCode=ui->verification_4->text().trimmed();
 
-    auto username=ui->User_ID_3->text().trimmed();
-    auto password=ui->Print_password->text().trimmed();
-    auto verificationCode=ui->verification_4->text().trimmed();
-    if(username.isEmpty()||password.isEmpty()||verificationCode.isEmpty())
+    if(account_number.first.isEmpty() || password.first.isEmpty() || input_verificationCode.isEmpty())
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Account_isEmpty);
-    else if(username=="admin"&&password=="917813"&&verificationCode==this->verificationCode.second)
+
+    else if(account_number.first ==account_number.second&& password.first ==password.second&&
+        input_verificationCode==verificationCode.second)
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_successfully);
-    else if(username!="admin"||password!="917813")
+
+    else if(account_number.first != account_number.second || password.first != password.second)
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Incorrect_account_or_password);
-    else if(verificationCode!= this->verificationCode.second)
+
+    else if(input_verificationCode!= verificationCode.second)
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
-    else
-        NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_failure);
+
+    else {
+        auto ing= NotifyTipManager::instance()->addNotifyTip(999,NotifyTipBox::Message_type::Be_logging_in);
+        QTimer::singleShot(1000, [ing] {NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_successfully);});
+    }
+     
+    
 
 }
 
 void LoginPage::on_RegBtn1_clicked()
 {
-     auto username=ui->User_ID_2->text().trimmed();
-     auto password=ui->setNew_password1_2->text().trimmed();
-     auto password2=ui->setNew_password2_2->text().trimmed();
-     auto verificationCode=ui->verification_3->text().trimmed();
-     if(username.isEmpty()||password.isEmpty()||verificationCode.isEmpty())
+     auto input_nick_name=ui->User_ID_2->text().trimmed();
+     new_used_password.first = ui->setNew_password1_2->text().trimmed();
+     new_used_password.second= ui->setNew_password2_2->text().trimmed();
+     auto input_verificationCode=ui->verification_3->text().trimmed();
+     if(input_nick_name.isEmpty()||new_used_password.first.isEmpty()||input_verificationCode.isEmpty()||
+         new_used_password.second.isEmpty())
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Account_isEmpty);
      //密码不能少于8位，且必须包含数字和大小写字母
-     else if(password.size()<8||!password.contains(QRegularExpression("[0-9]"))||!password.contains(QRegularExpression("[a-zA-Z]")))
+     else if(new_used_password.first.size()<8||!new_used_password.first.contains(QRegularExpression("[0-9]"))||
+         !new_used_password.first.contains(QRegularExpression("[a-zA-Z]")))
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
-     else if(password!=password2)
+
+     else if(new_used_password.first != new_used_password.second)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Two_password_entries);
-     else if(verificationCode!= this->verificationCode.second)
+
+     else if(input_verificationCode!= verificationCode.second)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
-     else
+
+     else 
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Registered_successfully);
+         
      
 }
 
 void LoginPage::on_affirm_clicked()
 {
-     auto username=ui->User_ID->text().trimmed();
-     auto password=ui->setNew_password1->text().trimmed();
-     auto password2=ui->setNew_password2->text().trimmed();
-     auto verificationCode=ui->verification_2->text().trimmed();
+     auto input_username=ui->User_ID->text().trimmed();
+     new_used_password.first = ui->setNew_password1_2->text().trimmed();
+     new_used_password.second = ui->setNew_password2_2->text().trimmed();
+     auto input_verificationCode=ui->verification_2->text().trimmed();
+
+     auto user = UserDao::instance()->searchUser_name(input_username);
+     if (!user) {
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::User_not_Exist);
+         return;
+     }
      
-     if (username.isEmpty() || password.isEmpty() || verificationCode.isEmpty())
+     else if (input_username.isEmpty() || new_used_password.first.isEmpty() || input_verificationCode.isEmpty())
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Account_isEmpty);
      //密码不能少于8位，且必须包含数字和大小写字母
-     else if (password.size() < 8 || !password.contains(QRegularExpression("[0-9]")) || !password.contains(QRegularExpression("[a-zA-Z]")))
+     else if (new_used_password.first.size() < 8 || !new_used_password.first.contains(QRegularExpression("[0-9]")) ||
+         !new_used_password.first.contains(QRegularExpression("[a-zA-Z]")))
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
-     else if (password != password2)
+
+     else if (new_used_password.first != new_used_password.second)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Two_password_entries);
-     else if (verificationCode != this->verificationCode.second)
+
+     else if (input_verificationCode != verificationCode.second)
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
+
      else
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
 }

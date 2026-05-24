@@ -19,8 +19,9 @@ public:
 	void setViewPort(QWidget* parent);
 	QWidget* ViewPort() const;
 
-	void addNotifyTip (NotifyTipBox::Message_type type = NotifyTipBox::Login_successfully);
-	void addNotifyTip(NotifyTipBox& tip);
+	NotifyTipBox* addNotifyTip(NotifyTipBox::Message_type type = NotifyTipBox::Login_successfully);
+	NotifyTipBox* addNotifyTip(qint32 delay,NotifyTipBox::Message_type type = NotifyTipBox::Login_successfully);
+	NotifyTipBox* addNotifyTip(NotifyTipBox& tip);
 
 	
 	//设置显示时间

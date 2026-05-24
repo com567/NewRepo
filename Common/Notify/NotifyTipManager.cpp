@@ -39,17 +39,26 @@ QWidget* NotifyTipManager::ViewPort() const
 	return m_viewPort;
 }
 
-void NotifyTipManager::addNotifyTip(NotifyTipBox::Message_type type)
+NotifyTipBox* NotifyTipManager::addNotifyTip(NotifyTipBox::Message_type type)
 {
 	auto T=m_notifyTips.emplaceBack(new NotifyTipBox(type));
 	emit newNotifyTip(T,m_notifyTips.size()-1);
+	return T;
+}
+
+NotifyTipBox* NotifyTipManager::addNotifyTip(qint32 delay, NotifyTipBox::Message_type type)
+{
+	auto T = m_notifyTips.emplaceBack(new NotifyTipBox(type,delay));
+	emit newNotifyTip(T, m_notifyTips.size() - 1);
+	return T;
 }
 
 
-void NotifyTipManager::addNotifyTip(NotifyTipBox& tip)
+NotifyTipBox* NotifyTipManager::addNotifyTip(NotifyTipBox& tip)
 {	   
 	auto T=m_notifyTips.emplaceBack(&tip);
     emit newNotifyTip(T,m_notifyTips.size()-1);
+	return T;
 }
 
 

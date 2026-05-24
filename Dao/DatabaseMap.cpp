@@ -6,8 +6,8 @@ namespace orm {
 			std::shared_ptr<User>from(const QSqlQuery& query) {
                 auto user = std::make_shared<User>();
 				user->id=query.value("id").toInt();
-				user->user_name=query.value("user_name").toString();
-				user->nick_name=query.value("nick_name").toString();
+				user->userName=query.value("user_name").toString();
+				user->nickName=query.value("nick_name").toString();
 				user->password=query.value("password").toString();
 				user->gender=query.value("gender").toString();
 				user->dateBirth=query.value("date_birth").toString();
@@ -17,6 +17,8 @@ namespace orm {
 				user->onlineTime=query.value("online_time").toString();
 				user->remark=query.value("remark").toString();
 				user->phoneNumber=query.value("phone_number").toString();
+
+				return user;
 			}
 
 		}

@@ -1,15 +1,15 @@
 #pragma once
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
-#include<QTimerEvent>
+#include <QCloseEvent>
 #include <QWidget>
-#include<QPainter>
-#include<QList>
+#include <QPainter>
+#include <QTimer>
+#include <QList>
 
 struct TipData {
 	QPixmap icon;
 	QString msg;
-	qint32 delay;
 	QColor backgroundColor;	  // 背景色
 	QColor textColor;		  // 文字色
 	QColor borderColor;		  // 边框色
@@ -23,6 +23,7 @@ class NotifyTipBox  : public QWidget
 public:
 	enum Message_type {
 		Account_isEmpty,				  //输入框为空
+		Be_logging_in,					  //登录中
 		Login_successfully,				  //登录成功
 		Login_failure,					  //登录失败
 		Registered_successfully,		  //注册成功
@@ -30,12 +31,13 @@ public:
 		Incorrect_account_or_password,	
 		Password_invalid,				  //密码无效					  
 		VerificationCode_error,			  //验证码错误
-		Two_password_entries
-		
+		Two_password_entries,
+		User_not_Exist
 	};
 public:
 	NotifyTipBox(QWidget *parent=nullptr);
 	NotifyTipBox(Message_type type,QWidget *parent = nullptr);
+	NotifyTipBox(Message_type type, qint32 delay, QWidget* parent = nullptr);
 	~NotifyTipBox();
 	
 	void setTipData(TipData &data);
@@ -53,6 +55,8 @@ public:
 		std::function<void()> finishedCallback
 	);
 	void End_animate();
+
+	void closeEvent(QCloseEvent* event)override;
 signals:
 	void disappeared(NotifyTipBox* self);
 protected:
@@ -62,6 +66,7 @@ protected:
 private:
 	int m_timerId;
 	TipData m_data;
+	qint32 m_delay;
 	inline static QList<TipData>m_preDatas{};		 //预设数据
 	QPropertyAnimation* m_animation{nullptr};
 };

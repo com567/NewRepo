@@ -3,6 +3,12 @@
 
 这是一个基于Qt和C++的道观管理系统
 
+Qt默认不支持MySQL,所以要自己编译驱动，步骤如下：
+1.进入Qt安装目录，找到Src\qtbase\src\plugins\sqldrivers
+2.添加list(APPEND CMAKE_PREFIX_PATH "D:/Users/MySQL8.4.7")
+3.右击CmakeLists.txt,选择生成，最后将out文件夹下的mysql扩展复制到Qt安装目录下的plugins\sqldrivers文件夹中
+
+
 运行方法：
 1.下载项目
 2.在项目目录下运行：qmake

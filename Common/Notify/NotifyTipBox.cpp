@@ -1,61 +1,76 @@
 #include "NotifyTipBox.h"
-
+#include <QTimerEvent>
 NotifyTipBox::NotifyTipBox(QWidget *parent)
 	:NotifyTipBox(Login_successfully,parent)
 {
 	
 }
 
-NotifyTipBox::NotifyTipBox(Message_type type,QWidget* parent)
+NotifyTipBox::NotifyTipBox(Message_type type,qint32 delay,QWidget* parent)
 	:QWidget(parent)
 	,m_timerId(0)
 {
 	setFixedSize(420,60);
 	if (m_preDatas.isEmpty()) {
 		m_preDatas.append({
-					QPixmap(":/Resources/warn_close.svg"),QString("输入不能为空"),3000
-					, QColor(255,255,205), QColor(255,165,5), QColor(240,255,5)
+					QPixmap(":/Resources/warn_close.svg"),QString("输入不能为空")
+					,QColor(255,255,205), QColor(255,165,5), QColor(240,255,5)
 		});
-		
 		m_preDatas.append({
-					QPixmap(":/Resources/succeed_close.svg"),QString("登录成功"),2000
-					, QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
+					QPixmap(":/Resources/succeed_close.svg"),QString("登录中...")
+					,QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
+		});
+		m_preDatas.append({
+					QPixmap(":/Resources/succeed_close.svg"),QString("登录成功")
+					,QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
 		});	
 		m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("登录失败"),2400
-					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
+					QPixmap(":/Resources/tip_close.svg"),QString("登录失败")
+					,QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
 		m_preDatas.append({
-					QPixmap(":/Resources/succeed_close.svg"),QString("注册成功"),2000
+					QPixmap(":/Resources/succeed_close.svg"),QString("注册成功")
 					, QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
 		});
 		m_preDatas.append({
-					QPixmap(":/Resources/succeed_close.svg"),QString("修改成功"),2000
-					, QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
+					QPixmap(":/Resources/succeed_close.svg"),QString("修改成功")
+					,QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
 		});
 
 		m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("账号或密码错误"),2400
+					QPixmap(":/Resources/tip_close.svg"),QString("账号或密码错误")
 					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
         m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("密码至少为8位且包含大小写字母"),2400
-					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
+					QPixmap(":/Resources/tip_close.svg"),QString("密码至少为8位且包含大小写字母")
+					,QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
 		m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("验证码错误"),2400
-					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
+					QPixmap(":/Resources/tip_close.svg"),QString("验证码错误")
+					,QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
         m_preDatas.append({
-					QPixmap(":/Resources/tip_close.svg"),QString("两次密码输入不一致"),2400
-					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
+					QPixmap(":/Resources/tip_close.svg"),QString("两次密码输入不一致")
+					,QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
+		});
+		m_preDatas.append({
+					QPixmap(":/Resources/tip_close.svg"),QString("用户不存在")
+					,QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
 		});
 		
 	}
 	setMessage_type(type);
+	m_delay = delay;
+
 	if (m_timerId == 0) {
-        m_timerId = startTimer(m_data.delay);
+        m_timerId = startTimer(m_delay);
 	}
+}
+
+NotifyTipBox::NotifyTipBox(Message_type type,QWidget* parent)
+	:NotifyTipBox(type,1000,parent)
+{
+
 }
 
 
@@ -112,8 +127,8 @@ void NotifyTipBox::Begin_animate()
 		killTimer(m_timerId);
 		m_timerId = 0;
 	}
-	if (m_data.delay> 0)
-		m_timerId = startTimer(m_data.delay);
+	if (m_delay> 0)
+		m_timerId = startTimer(m_delay);
 }
 
 void NotifyTipBox::Update_animate(
@@ -189,6 +204,12 @@ void NotifyTipBox::End_animate()
 	);
 }
 
+void NotifyTipBox::closeEvent(QCloseEvent* event)
+{
+	emit disappeared(this);
+	event->ignore();
+}
+
 void NotifyTipBox::paintEvent(QPaintEvent* event)
 {
 	QPainter painter(this);
@@ -213,7 +234,7 @@ void NotifyTipBox::timerEvent(QTimerEvent* event)
 	if (event->timerId() == m_timerId)
 	{
 		killTimer(m_timerId);
-		m_data.delay = 0;	
+		m_delay = 0;	
 		End_animate();
 	}
 
