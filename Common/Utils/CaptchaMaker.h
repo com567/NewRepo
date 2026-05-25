@@ -1,8 +1,8 @@
 #pragma once
 
-#include<QRandomGenerator>
+#include <QRandomGenerator>
 #include <QPixmap>
-#include<QFont>
+#include <QFont>
 #define RAND(min,max) QRandomGenerator::global()->bounded(min,max)
 class CaptchaMaker
 {
@@ -32,6 +32,13 @@ public:
 	QPair<QString,QString>createText();
     QPixmap createImage(const QString&text);
 
+	static QString RandomAccount() {
+		QString account="";
+		for (int i = 0;i < 12;i++) {
+			account.append(QChar('0'+ RAND(0, 10)));
+		}
+		return account;
+	}
 private:
 	VerificationCode_type m_type;
     Image m_Image;

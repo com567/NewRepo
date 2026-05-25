@@ -7,5 +7,6 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     LoginPage window;
     window.showMaximized();
+    
     return app.exec();
 }

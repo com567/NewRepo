@@ -36,5 +36,8 @@ public:
 	void modify_nickName(const QString& nick_name, const QSqlDatabase& con = getConnection());
 	void modify_dateBirth(const QString& date_birth, const QSqlDatabase& con = getConnection());
 	void modify_gender(const QString& gender, const QSqlDatabase& con = getConnection());
+
+
+
 };
 

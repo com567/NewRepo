@@ -28,7 +28,7 @@ public:
 		Login_failure,					  //登录失败
 		Registered_successfully,		  //注册成功
 		modify_successfully,			  //修改成功
-		Incorrect_account_or_password,	
+		Incorrect_account_or_password,	  //账号或密码错误
 		Password_invalid,				  //密码无效					  
 		VerificationCode_error,			  //验证码错误
 		Two_password_entries,
