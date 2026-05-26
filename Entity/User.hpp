@@ -13,4 +13,6 @@ struct User{
     QString onlineTime;
     QString remark;
     QString phoneNumber;
+    qint8 user_state;
+    qint8 is_unsubscribe;
 };

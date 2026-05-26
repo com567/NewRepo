@@ -23,6 +23,9 @@ set(PROJECT_SOURCES
     LoginPage.ui
     LoginPage.h
     LoginPage.cpp
+    MainWindow.ui
+    MainWindow.h
+    MainWindow.cpp
     Common/Notify/NotifyTipBox.h
     Common/Notify/NotifyTipBox.cpp
     Common/Notify/NotifyTipManager.h
@@ -36,11 +39,15 @@ set(PROJECT_SOURCES
     Common/Utils/CaptchaMaker.cpp
     Common/Utils/Coating.h
     Common/Utils/Coating.cpp
-
+    Common/Config/Config.h
+    Common/Config/Config.cpp
     Dao/UserDao.h
     Dao/UserDao.cpp
     Dao/DatabaseMap.h
     Dao/DatabaseMap.cpp
+
+    Service/UserService.h
+    Service/UserService.cpp
     HdyStudentManager.rc
 )
 

@@ -31,13 +31,16 @@ public:
 
 	std::shared_ptr<User> searchUser_name(const QString&name,const QSqlDatabase&con = getConnection());
     std::shared_ptr<User> searchNick_name(const QString&phone, const QSqlDatabase& con = getConnection());
-	void register_user(const QString& account,const QString& password,const QSqlDatabase& con = getConnection());
-	void modify_password(const QString& account, const QString& new_password, const QSqlDatabase& con = getConnection());
-	void modify_nickName(const QString& nick_name, const QSqlDatabase& con = getConnection());
-	void modify_dateBirth(const QString& date_birth, const QSqlDatabase& con = getConnection());
-	void modify_gender(const QString& gender, const QSqlDatabase& con = getConnection());
 
 
+	bool register_user(const QString& account,const QString& password,const QSqlDatabase& con = getConnection());
+	bool modify_password(const QString& account, const QString& new_password, const QSqlDatabase& con = getConnection());
+	bool modify_nickName(const QString& nick_name, const QSqlDatabase& con = getConnection());
+	bool modify_avatar(const QString& avatar, const QSqlDatabase& con = getConnection());
+	bool modify_dateBirth(const QString& date_birth, const QSqlDatabase& con = getConnection());
+	bool modify_gender(const QString& gender, const QSqlDatabase& con = getConnection());
+	bool modify_phoneNumber(const QString& phone_number, const QSqlDatabase& con = getConnection());
+	bool delete_user(const QString& password, const QSqlDatabase& con = getConnection());
 
 };
 

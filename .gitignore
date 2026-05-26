@@ -10,8 +10,7 @@
 *.userosscache
 *.sln.docstates
 
-.vs
-.qtcreator
+
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

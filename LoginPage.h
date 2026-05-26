@@ -1,7 +1,8 @@
 #pragma once
 #include <QtWidgets/QWidget>
-#include<QPushButton>
+#include <QPushButton>
 #include "Common/Utils/CaptchaMaker.h"
+#include "Common/Config/Config.h"
 #include "ui_LoginPage.h"
 
 QT_BEGIN_NAMESPACE
@@ -29,6 +30,7 @@ protected:
 private:
     Ui::LoginPageClass *ui;
     CaptchaMaker m_Maker;
+    std::unique_ptr<Config>config{Config::instance()};
     QPair<QString, QString>verificationCode{"",""};
     QPair<QString, QString>new_used_password{ "","" };
     QString copy;

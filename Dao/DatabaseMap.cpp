@@ -17,7 +17,8 @@ namespace orm {
 				user->onlineTime=query.value("online_time").toString();
 				user->remark=query.value("remark").toString();
 				user->phoneNumber=query.value("phone_number").toString();
-
+				user->user_state=query.value("user_state").toInt();
+				user->is_unsubscribe=query.value("is_unsubscribe").toInt();
 				return user;
 			}
 

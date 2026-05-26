@@ -45,7 +45,7 @@ std::shared_ptr<User> UserDao::searchNick_name(const QString& nickname, const QS
     return user;
 }
 
-void UserDao::register_user(const QString& account, const QString& password, const QSqlDatabase& con)
+bool UserDao::register_user(const QString& account, const QString& password, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
 
@@ -55,32 +55,65 @@ void UserDao::register_user(const QString& account, const QString& password, con
     query.bindValue(2, password);
 	query.bindValue(3, QDateTime::currentDateTime().toString("yyyy-MM-dd"));
 	query.bindValue(4, account);
-	query.bindValue(5, QDateTime::currentDateTime().toString("yyyy-MM-dd"));
+	query.bindValue(5, QDateTime::currentDateTime().toString("yyyy-MM-dd HH时"));
     if (!query.exec()) {
         qDebug() << query.lastError();
-        return;
+        return false;
     }
-
+    return true;
 }
 
-void UserDao::modify_password(const QString& account, const QString& new_password, const QSqlDatabase& con)
+bool UserDao::modify_password(const QString& account, const QString& new_password, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
+    query.prepare("UPDATE Taoist_temple_user SET password = ? WHERE user_name = ?");
+    query.bindValue(0, new_password);
+    query.bindValue(1, account);
+    if (!query.exec()) {
+		qDebug() << query.lastError();
+		return false;
+    }
+    return true;
 }
 
-void UserDao::modify_nickName(const QString& nick_name, const QSqlDatabase& con)
+bool UserDao::modify_nickName(const QString& nick_name, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
+    return false;
 }
 
-void UserDao::modify_dateBirth(const QString& date_birth, const QSqlDatabase& con)
+bool UserDao::modify_avatar(const QString& avatar, const QSqlDatabase& con)
 {
-    QSqlQuery query(con);
+    return false;
 }
 
-void UserDao::modify_gender(const QString& gender, const QSqlDatabase& con)
+bool UserDao::modify_dateBirth(const QString& date_birth, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
+    return false;
+}
+
+bool UserDao::modify_gender(const QString& gender, const QSqlDatabase& con)
+{
+    QSqlQuery query(con);
+    return false;
+}
+
+bool UserDao::modify_phoneNumber(const QString& phone_number, const QSqlDatabase& con)
+{
+    return false;
+}
+
+bool UserDao::delete_user(const QString& password, const QSqlDatabase& con)
+{
+    QSqlQuery query(con);
+    query.prepare("DELETE FROM Taoist_temple_user WHERE password = ?");
+    query.bindValue(0, password);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return false;
+    }
+    return true;
 }
 
 

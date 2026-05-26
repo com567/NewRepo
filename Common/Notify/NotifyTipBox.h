@@ -23,11 +23,12 @@ class NotifyTipBox  : public QWidget
 public:
 	enum Message_type {
 		Account_isEmpty,				  //输入框为空
-		Be_logging_in,					  //登录中
 		Login_successfully,				  //登录成功
 		Login_failure,					  //登录失败
 		Registered_successfully,		  //注册成功
+        Registered_failure,				  //注册失败
 		modify_successfully,			  //修改成功
+		modify_failure,				      //修改失败
 		Incorrect_account_or_password,	  //账号或密码错误
 		Password_invalid,				  //密码无效					  
 		VerificationCode_error,			  //验证码错误

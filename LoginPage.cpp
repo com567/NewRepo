@@ -4,7 +4,7 @@
 #include "Common/Utils/Coating.h"
 #include "Common/Widgets/MsgBox.h"
 #include "Common/Base/Defer.hpp"
-#include "Dao/UserDao.h"
+#include "Service/UserService.h"
 #include <QRegularExpression>
 #include <QPainter>
 
@@ -12,7 +12,8 @@
 LoginPage::LoginPage(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::LoginPageClass()) 
-    ,copy("版权归洛杉矶湖人队所有")
+    , copy("版权归洛杉矶湖人队所有")
+    , config(Config::instance())
     
 {
     ui->setupUi(this);
@@ -26,7 +27,11 @@ LoginPage::LoginPage(QWidget *parent)
     connect(ui->RegBtn2, &QPushButton::clicked, this, [this] { switch_interface(ui->RegWiget); });
     connect(ui->LoginBtn2, &QPushButton::clicked, this, [this] { switch_interface(ui->LoginWiget); });
     connect(ui->return_home, &QPushButton::clicked, this, [this] {switch_interface(ui->LoginWiget); });
-    connect(ui->ForgetPasswordBtn, &QPushButton::clicked, this, [this] {switch_interface(ui->ForgetPassword); });
+    connect(ui->ForgetPasswordBtn, &QPushButton::clicked, this, 
+        [this] 
+        {   switch_interface(ui->ForgetPassword);
+            ui->User_ID->setText(config->getValue("Account/account_number").toString());
+        });
     connect(ui->RegBtn1, &QPushButton::clicked, this, [this] {});
     connect(ui->LoginBtn1, &QPushButton::clicked, this, [this] {});
     connect(ui->verificationCode_2, &ClickLabel::clicked, this,
@@ -46,6 +51,11 @@ LoginPage::LoginPage(QWidget *parent)
     ui->verificationCode_4->click();
     ui->verificationCode_3->click();
     ui->verificationCode_2->click();
+
+
+    ui->User_ID_3->setText(config->getValue("Account/account_number").toString());
+    ui->Print_password->setText(config->getValue("Account/password").toString());
+    ui->checkBox_1->setChecked(config->getValue("Account/remember_password").toBool());
 }
 
 LoginPage::~LoginPage()
@@ -86,23 +96,31 @@ void LoginPage::on_LoginBtn1_clicked()
        return;
     }
     
-	auto user = UserDao::instance()->searchUser_name(account_number);
+	auto user = UserService::instance()->searchUser_name(account_number);
     if (!user||account_number != user->userName||password != user->password) {
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Incorrect_account_or_password);
         return;
     }
 
-    else {
-        if (input_verificationCode != verificationCode.second) {
+    else if (input_verificationCode != verificationCode.second){
+         {
             NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::VerificationCode_error);
             return;
         }
-            
+    }
+    else {
+        
+        config->setValue("Account/account_number",account_number);
+        if (ui->checkBox_1->isChecked()) { 
+            config->setValue("Account/password", password);
+            config->setValue("Account/remember_password",ui->checkBox_1->isChecked());
+        }
         else {
+            config->remove("Account/password");
+            config->remove("Account/remember_password");
+        }
             NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_successfully);
             return;
-        }
-            
     }
             
 }
@@ -140,8 +158,14 @@ void LoginPage::on_RegBtn1_clicked()
         
      }
 
-     else 
-         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Registered_successfully);
+     else {
+         if (UserService::instance()->register_user(input_nick_name, new_used_password.first)) {
+             NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Registered_successfully);
+             return;
+         }
+         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Registered_failure);
+     }
+         
          
      
 }
@@ -153,7 +177,7 @@ void LoginPage::on_affirm_clicked()
      new_used_password.second = ui->setNew_password2->text().trimmed();
      auto input_verificationCode=ui->verification_2->text().trimmed();
 
-     auto user = UserDao::instance()->searchUser_name(input_username);
+     auto user = UserService::instance()->searchUser_name(input_username);
      if (!user) {
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::User_not_Exist);
          return;

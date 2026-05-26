@@ -12,7 +12,7 @@ public:
         static std::once_flag flag;
         std::call_once(flag, []() {
             ins = new T(); // 可传入父对象或在构造中设置 parent
-            });
+        });
         return ins;
     }
     

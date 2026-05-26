@@ -17,10 +17,6 @@ NotifyTipBox::NotifyTipBox(Message_type type,qint32 delay,QWidget* parent)
 					,QColor(255,255,205), QColor(255,165,5), QColor(240,255,5)
 		});
 		m_preDatas.append({
-					QPixmap(":/Resources/succeed_close.svg"),QString("登录中...")
-					,QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
-		});
-		m_preDatas.append({
 					QPixmap(":/Resources/succeed_close.svg"),QString("登录成功")
 					,QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
 		});	
@@ -33,10 +29,17 @@ NotifyTipBox::NotifyTipBox(Message_type type,qint32 delay,QWidget* parent)
 					, QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
 		});
 		m_preDatas.append({
+					QPixmap(":/Resources/tip_close.svg"),QString("注册失败")
+					,QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
+			});
+		m_preDatas.append({
 					QPixmap(":/Resources/succeed_close.svg"),QString("修改成功")
 					,QColor(220,255,225), QColor(40,255,40), QColor(0, 255, 10)
 		});
-
+		m_preDatas.append({
+					QPixmap(":/Resources/tip_close.svg"),QString("修改失败")
+					,QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
+		});
 		m_preDatas.append({
 					QPixmap(":/Resources/tip_close.svg"),QString("账号或密码错误")
 					, QColor(255, 210, 210), QColor(255, 50, 60) ,QColor(255, 20, 20)
