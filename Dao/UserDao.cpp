@@ -1,6 +1,6 @@
 #include "UserDao.h"
 #include "DatabaseMap.h"
-#include "../Common/Utils/CaptchaMaker.h"
+#include "Common/Utils/CaptchaMaker.h"
 #include <QDateTime>
 UserDao::UserDao()
 {}

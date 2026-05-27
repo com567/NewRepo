@@ -1,12 +1,11 @@
 #pragma once
 #include "NotifyTipBox.h"
-#include "LoginPage.h"
 #include "Common/Base/Singleton.hpp"
 #include <QResizeEvent>
 #include <QObject>
 
 //通知提示管理器
-class NotifyTipManager  : public QObject,public Singleton<NotifyTipManager>
+class NotifyTipManager : public QObject,public Singleton<NotifyTipManager>
 {
 	Q_OBJECT
 	friend class Singleton<NotifyTipManager>;

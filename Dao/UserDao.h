@@ -1,5 +1,5 @@
 #pragma once
-#include "../Common/Base/Singleton.hpp"
+#include "Common/Base/Singleton.hpp"
 #include "SqlConnection.hpp"
 #include "DatabaseMap.h"
 #include <QSqlDatabase>
@@ -12,8 +12,10 @@ class UserDao : public Singleton<UserDao>
 public:
 	UserDao();
 	~UserDao();
+	//严重性	代码	说明	项目	文件	行	抑制状态	详细信息
+	//错误	C2061	语法错误 : 标识符“LoginPage”	D : \_Q2026\HdyStudentManager\out\build\debug\HdyStudentManager	D : \_Q2026\HdyStudentManager\out\build\debug\HdyStudentManager_autogen\include\ui_MainWindow.h	49
 
-	void static printUser(const std::shared_ptr<User>& user) {
+	/*void static printUser(const std::shared_ptr<User>& user) {
 		if (!user) {
 			qDebug() << "用户不存在";
 			return;
@@ -27,7 +29,7 @@ public:
 		qDebug() << user->onlineTime;
 		qDebug() << user->phoneNumber;
 		qDebug() << user->dateBirth;
-	}
+	}*/
 
 	std::shared_ptr<User> searchUser_name(const QString&name,const QSqlDatabase&con = getConnection());
     std::shared_ptr<User> searchNick_name(const QString&phone, const QSqlDatabase& con = getConnection());

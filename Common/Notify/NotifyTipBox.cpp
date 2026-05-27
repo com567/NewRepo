@@ -71,7 +71,7 @@ NotifyTipBox::NotifyTipBox(Message_type type,qint32 delay,QWidget* parent)
 }
 
 NotifyTipBox::NotifyTipBox(Message_type type,QWidget* parent)
-	:NotifyTipBox(type,1000,parent)
+	:NotifyTipBox(type,2000,parent)
 {
 
 }

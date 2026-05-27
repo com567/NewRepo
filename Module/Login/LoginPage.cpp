@@ -1,9 +1,8 @@
 #include "LoginPage.h"
-#include "Common/Notify/NotifyTipManager.h"
+
 #include "Common/Widgets/ClickLabel.h"
 #include "Common/Utils/Coating.h"
 #include "Common/Widgets/MsgBox.h"
-#include "Common/Base/Defer.hpp"
 #include "Service/UserService.h"
 #include <QRegularExpression>
 #include <QPainter>
@@ -111,6 +110,7 @@ void LoginPage::on_LoginBtn1_clicked()
     else {
         
         config->setValue("Account/account_number",account_number);
+        
         if (ui->checkBox_1->isChecked()) { 
             config->setValue("Account/password", password);
             config->setValue("Account/remember_password",ui->checkBox_1->isChecked());
@@ -119,8 +119,8 @@ void LoginPage::on_LoginBtn1_clicked()
             config->remove("Account/password");
             config->remove("Account/remember_password");
         }
-            NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Login_successfully);
-            return;
+            emit sig_login_finished();
+            
     }
             
 }

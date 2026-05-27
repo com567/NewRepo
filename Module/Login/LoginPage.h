@@ -1,6 +1,7 @@
 #pragma once
 #include <QtWidgets/QWidget>
 #include <QPushButton>
+#include "Common/Notify/NotifyTipManager.h"
 #include "Common/Utils/CaptchaMaker.h"
 #include "Common/Config/Config.h"
 #include "ui_LoginPage.h"
@@ -22,6 +23,9 @@ public slots:
     void on_RegBtn1_clicked();
     void on_affirm_clicked();
     void Storage_verificationCode(ClickLabel*label);
+
+signals:
+    void sig_login_finished();
 
 protected:
     void paintEvent(QPaintEvent* event)override;

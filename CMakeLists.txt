@@ -7,7 +7,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Sql)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR})
+
+
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR}
     COMPONENTS
         Core
@@ -20,12 +24,19 @@ qt_standard_project_setup()
 set(PROJECT_SOURCES
     main.cpp
     Resource.qrc
-    LoginPage.ui
-    LoginPage.h
-    LoginPage.cpp
+    HdyStudentManager.rc
+
+    Module/Login/LoginPage.ui
+    Module/Login/LoginPage.h
+    Module/Login/LoginPage.cpp
+    Module/Home/HomePage.ui
+    Module/Home/HomePage.h
+    Module/Home/HomePage.cpp
+
     MainWindow.ui
     MainWindow.h
     MainWindow.cpp
+
     Common/Notify/NotifyTipBox.h
     Common/Notify/NotifyTipBox.cpp
     Common/Notify/NotifyTipManager.h
@@ -41,6 +52,7 @@ set(PROJECT_SOURCES
     Common/Utils/Coating.cpp
     Common/Config/Config.h
     Common/Config/Config.cpp
+
     Dao/UserDao.h
     Dao/UserDao.cpp
     Dao/DatabaseMap.h
@@ -48,7 +60,7 @@ set(PROJECT_SOURCES
 
     Service/UserService.h
     Service/UserService.cpp
-    HdyStudentManager.rc
+    
 )
 
 qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

@@ -1,11 +1,11 @@
-﻿#include "LoginPage.h"
+#include "MainWindow.h"
 #include <QtWidgets/QApplication>
 
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    LoginPage window;
+    MainWindow window;
     window.showMaximized();
     
     return app.exec();

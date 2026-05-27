@@ -1,5 +1,5 @@
 #pragma once
-#include"../Entity/User.hpp"
+#include"Entity/User.hpp"
 #include<QSqlQuery>
 #include<iostream>
 #include<memory>

@@ -1,5 +1,5 @@
 #include "NotifyTipManager.h"
-#include<QWidget>
+#include <QWidget>
 #include <QDebug>
 #include <QEvent>
 
