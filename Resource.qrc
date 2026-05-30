@@ -9,5 +9,6 @@
         <file>Resources/warn_icon.svg</file>
         <file>Resources/close_hover.svg</file>
         <file>Resources/false_alarm.svg</file>
+        <file>Resources/qss/style.css</file>
     </qresource>
 </RCC>

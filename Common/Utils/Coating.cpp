@@ -7,6 +7,7 @@
 Coating::Coating(QWidget *parent)
 	: QWidget(parent)
 {
+	setAttribute(Qt::WA_StyledBackground);
 	setFocusPolicy(Qt::StrongFocus);
 	setFocus();
 }

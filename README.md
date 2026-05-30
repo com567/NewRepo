@@ -17,6 +17,7 @@ Qt默认不支持MySQL,所以要自己编译驱动，步骤如下：
 
 目录树结构：
 HdyStudentManager:主目录{
+
     一.Common:公共类  {	 
            1.Base:基础类
            2.Notify:提示类
@@ -33,15 +34,41 @@ HdyStudentManager:主目录{
     }
 
     四.Entity:实体{
-           
+           User:用户实体
+    }
+
+    五.Service:服务层{
+           UserService:服务器访问对象 
+    }
+
+    六.Module:界面模组{
+           Home:首页
+           Login:登录页
     }
 
 }
+
 类列表：
 1.LoginPage:登录界面
+
 2.NotifyBox:提示框
 3.NotifyManager:提示框管理
 4.MsgBox:消息框
 5.ClickLabel:点击标签
 6.CaptchaMaker:验证码
 7.Coating:遮蔽层
+8.ClickLabel:自定义可点击验证码按键
+9.HoverButton:自定义可点击头像按键
+10.MsgBox:消息盒子
+11.Config:配置文件
+12.Defer:延迟调用
+13.Singleton:返回单例
+
+14.UserDao:数据层
+15.SqlConnection:连接层
+
+16.HomePage:首页
+
+17.UserService:服务层
+
+18.MainWindow:主页

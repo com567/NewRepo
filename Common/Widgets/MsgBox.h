@@ -30,7 +30,6 @@ public:
     QPixmap getIcon()const;
 
 protected:
-	void JumpTo();
 signals:
 	void Ok_clicked();
 private:

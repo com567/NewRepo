@@ -1,10 +1,11 @@
 #pragma once
-#include <QtWidgets/QWidget>
-#include <QPushButton>
 #include "Common/Notify/NotifyTipManager.h"
 #include "Common/Utils/CaptchaMaker.h"
 #include "Common/Config/Config.h"
 #include "ui_LoginPage.h"
+#include <QPushButton>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginPageClass; };
@@ -18,7 +19,11 @@ public:
     LoginPage(QWidget* parent = nullptr);
     ~LoginPage();
     void switch_interface(QWidget*w);
-public slots:
+
+
+public 
+
+slots:
     void on_LoginBtn1_clicked();
     void on_RegBtn1_clicked();
     void on_affirm_clicked();

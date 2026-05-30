@@ -1,0 +1,22 @@
+QMenu{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid rgb(200, 200, 200);
+    padding-top:50px;
+    padding-bottom:50px;
+}
+
+QMenu::item {
+    color: rgb(0, 0, 0);
+}
+
+QMenu::item:selected {
+    color:blue;
+    background-color:aqua;
+
+}
+
+QMenu::separator {
+    background-color: rgb(200, 200, 200);
+
+}

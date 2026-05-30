@@ -10,6 +10,7 @@ NotifyTipBox::NotifyTipBox(Message_type type,qint32 delay,QWidget* parent)
 	:QWidget(parent)
 	,m_timerId(0)
 {
+	setAttribute(Qt::WA_StyledBackground);
 	setFixedSize(420,60);
 	if (m_preDatas.isEmpty()) {
 		m_preDatas.append({
@@ -71,7 +72,7 @@ NotifyTipBox::NotifyTipBox(Message_type type,qint32 delay,QWidget* parent)
 }
 
 NotifyTipBox::NotifyTipBox(Message_type type,QWidget* parent)
-	:NotifyTipBox(type,2000,parent)
+	:NotifyTipBox(type,1500,parent)
 {
 
 }

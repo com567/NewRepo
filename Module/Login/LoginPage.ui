@@ -14,25 +14,18 @@
    <string>LoginPage</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#LoginWiget,#RegWiget,#ForgetPassword{
-	background-color: rgb(255, 255, 255);
+   <string notr="true">#LoginWiget, #RegWiget, #ForgetPassword {
+    background-color: rgb(255, 255, 255);
 }
 
-#LoginPageClass QLineEdit:hover{
-	
-
-}
-
-#LoginPageClass QLineEdit:focus{
-	
-	background-color: rgb(85, 255, 255);
-}
-</string>
+#LoginPageClass .QLineEdit:focus {
+    background-color: rgb(85, 255, 255);
+}</string>
   </property>
   <widget class="QWidget" name="ForgetPassword" native="true">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>-10</x>
      <y>100</y>
      <width>440</width>
      <height>500</height>
@@ -122,18 +115,16 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#affirm{
-font: 14pt &quot;Microsoft YaHei UI&quot;;
-	background-color: rgb(0, 0, 255);
-	color: rgb(255, 255, 255);
+     <string notr="true">#affirm {
+    font: 14pt &quot;Microsoft YaHei UI&quot;;
+    background-color: rgb(0, 0, 255);
+    color: rgb(255, 255, 255);
 }
-#LoginBtn1:checked,
-#LoginBtn1:pressed{
-    background-color: rgb(100,100,100);
+
+#affirm:hover {
+    background-color: rgb(170, 0, 255);
 }
-#affirm:hover{
-	background-color: rgb(170, 0, 255);
-}
+
 </string>
     </property>
     <property name="text">
@@ -150,13 +141,15 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#return_home{
-	color: rgb(0, 0, 255);
-	border:none;
+     <string notr="true">#return_home {
+    color: rgb(0, 0, 255);
+    border: none;
 }
-#return_home:hover{
-	background-color: rgb(170, 0, 255);
-}</string>
+
+#return_home:hover {
+    background-color: rgb(170, 0, 255);
+}
+</string>
     </property>
     <property name="text">
      <string>返回首页</string>
@@ -175,7 +168,7 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="Resource.qrc">:/Resources/yzm.gif</pixmap>
+     <pixmap resource="../../Resource.qrc">:/Resources/yzm.gif</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -188,8 +181,8 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
   <widget class="QWidget" name="LoginWiget" native="true">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>130</y>
+     <x>670</x>
+     <y>230</y>
      <width>440</width>
      <height>490</height>
     </rect>
@@ -268,17 +261,14 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#LoginBtn1{
-font: 14pt &quot;Microsoft YaHei UI&quot;;
-	background-color: rgb(0, 0, 255);
-	color: rgb(255, 255, 255);
+     <string notr="true">
+#LoginBtn1:hover {
+    background-color: rgb(170, 0, 255);
 }
-#LoginBtn1:checked,
-#LoginBtn1:pressed{
-    background-color: rgb(100,100,100);
-}
-#LoginBtn1:hover{
-	background-color: rgb(170, 0, 255);
+#LoginBtn1 {
+    font: 14pt &quot;Microsoft YaHei UI&quot;;
+    background-color: rgb(0, 0, 255);
+    color: rgb(255, 255, 255);
 }</string>
     </property>
     <property name="text">
@@ -321,12 +311,13 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#RegBtn2{
-	color: rgb(0, 0, 255);
-	border:none;
+     <string notr="true">#RegBtn2 {
+    color: rgb(0, 0, 255);
+    border: none;
 }
-#RegBtn2:hover{
-	background-color: rgb(170, 0, 255);
+
+#RegBtn2:hover {
+    background-color: rgb(170, 0, 255);
 }</string>
     </property>
     <property name="text">
@@ -346,7 +337,7 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="Resource.qrc">:/Resources/yzm.gif</pixmap>
+     <pixmap resource="../../Resource.qrc">:/Resources/yzm.gif</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -378,12 +369,13 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#ForgetPasswordBtn{
-	color: rgb(0, 0, 255);
-	border:none;
+     <string notr="true">#ForgetPasswordBtn {
+    color: rgb(0, 0, 255);
+    border: none;
 }
-#ForgetPasswordBtn:hover{
-	background-color: rgb(170, 0, 255);
+
+#ForgetPasswordBtn:hover {
+    background-color: rgb(170, 0, 255);
 }</string>
     </property>
     <property name="text">
@@ -394,8 +386,8 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
   <widget class="QWidget" name="RegWiget" native="true">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>130</y>
+     <x>380</x>
+     <y>100</y>
      <width>440</width>
      <height>500</height>
     </rect>
@@ -484,19 +476,14 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#RegBtn1{
-font: 14pt &quot;Microsoft YaHei UI&quot;;
-	background-color: rgb(0, 0, 255);
-	color: rgb(255, 255, 255);
+     <string notr="true">#RegBtn1 {
+    font: 14pt &quot;Microsoft YaHei UI&quot;;
+    background-color: rgb(0, 0, 255);
+    color: rgb(255, 255, 255);
 }
-#LoginBtn1:checked,
-#LoginBtn1:pressed{
-    background-color: rgb(100,100,100);
-}
-#RegBtn1:hover{
-	background-color: rgb(170, 0, 255);
-}
-</string>
+#RegBtn1:hover {
+    background-color: rgb(170, 0, 255);
+}</string>
     </property>
     <property name="text">
      <string>立 即 注 册</string>
@@ -515,12 +502,13 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#LoginBtn2{
-	color: rgb(0, 0, 255);
-	border:none;
+     <string notr="true">#LoginBtn2 {
+    color: rgb(0, 0, 255);
+    border: none;
 }
-#LoginBtn2:hover{
-	background-color: rgb(170, 0, 255);
+
+#LoginBtn2:hover {
+    background-color: rgb(170, 0, 255);
 }</string>
     </property>
     <property name="text">
@@ -540,7 +528,7 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="Resource.qrc">:/Resources/yzm.gif</pixmap>
+     <pixmap resource="../../Resource.qrc">:/Resources/yzm.gif</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -573,10 +561,10 @@ font: 14pt &quot;Microsoft YaHei UI&quot;;
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="Resource.qrc"/>
-  <include location="Resource.qrc"/>
-  <include location="Resource.qrc"/>
-  <include location="Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
+  <include location="../../Resource.qrc"/>
  </resources>
  <connections/>
 </ui>

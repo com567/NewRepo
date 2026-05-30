@@ -32,6 +32,10 @@ set(PROJECT_SOURCES
     Module/Home/HomePage.ui
     Module/Home/HomePage.h
     Module/Home/HomePage.cpp
+    Module/Home/PersonallnfoPage.ui
+    Module/Home/PersonallnfoPage.h
+    Module/Home/PersonallnfoPage.cpp
+
 
     MainWindow.ui
     MainWindow.h
@@ -46,10 +50,14 @@ set(PROJECT_SOURCES
     Common/Widgets/MsgBox.h
     Common/Widgets/MsgBox.cpp
     Common/Widgets/MsgBox.ui
+    Common/Widgets/HoverButton.h
+    Common/Widgets/HoverButton.cpp
     Common/Utils/CaptchaMaker.h
     Common/Utils/CaptchaMaker.cpp
     Common/Utils/Coating.h
     Common/Utils/Coating.cpp
+    Common/Utils/Utils.h
+    Common/Utils/Utils.cpp
     Common/Config/Config.h
     Common/Config/Config.cpp
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "ui_MainWindow.h"
-#include <QWidget>
-
+#include "Service/UserService.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindowClass; };
@@ -15,6 +14,8 @@ public:
 	MainWindow(QWidget *parent = nullptr);
 	~MainWindow();
 
+signals:
+	void sig_login_success();
 private:
 	Ui::MainWindowClass *ui;
 };

@@ -15,7 +15,12 @@ public:
 	HomePage(QWidget *parent = nullptr);
 	~HomePage();
 
+signals:
+	void sig_quit_login();
+
 private:
 	Ui::HomePageClass *ui;
+	QMenu* m_personalMenu{};
+	void initPersonalMenu();
 };
 

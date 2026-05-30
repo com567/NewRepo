@@ -1,9 +1,8 @@
-#include "LoginPage.h"
-
 #include "Common/Widgets/ClickLabel.h"
 #include "Common/Utils/Coating.h"
 #include "Common/Widgets/MsgBox.h"
-#include "Service/UserService.h"
+#include "MainWindow.h"
+
 #include <QRegularExpression>
 #include <QPainter>
 
@@ -16,10 +15,7 @@ LoginPage::LoginPage(QWidget *parent)
     
 {
     ui->setupUi(this);
-
-    NotifyTipManager::instance()->setViewPort(this);
-    //Coating::instance()->setViewPort(this);
-
+    setAttribute(Qt::WA_StyledBackground);
     background_ = QPixmap(":/Resources/man.jpg");
     widget=ui->LoginWiget;
     switch_interface(widget);
@@ -84,6 +80,7 @@ void LoginPage::switch_interface(QWidget* w)
 }
 
 
+
 void LoginPage::on_LoginBtn1_clicked()
 {
     auto account_number= ui->User_ID_3->text().trimmed();
@@ -120,7 +117,6 @@ void LoginPage::on_LoginBtn1_clicked()
             config->remove("Account/remember_password");
         }
             emit sig_login_finished();
-            
     }
             
 }
