@@ -1,8 +1,7 @@
 #include "Common/Widgets/ClickLabel.h"
-#include "Common/Utils/Coating.h"
 #include "Common/Widgets/MsgBox.h"
+#include "ContextHolder.h"
 #include "MainWindow.h"
-
 #include <QRegularExpression>
 #include <QPainter>
 
@@ -93,6 +92,7 @@ void LoginPage::on_LoginBtn1_clicked()
     }
     
 	auto user = UserService::instance()->searchUser_name(account_number);
+    
     if (!user||account_number != user->userName||password != user->password) {
         NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Incorrect_account_or_password);
         return;
@@ -116,6 +116,7 @@ void LoginPage::on_LoginBtn1_clicked()
             config->remove("Account/password");
             config->remove("Account/remember_password");
         }
+            ContextHolder::instance()->setSelf(user);
             emit sig_login_finished();
     }
             

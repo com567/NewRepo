@@ -1,5 +1,7 @@
 #include "Utils.h"
 #include <QGraphicsDropShadowEffect>
+#include <QPainterPath>
+#include <QPainter>
 
 void Utils::setDropShadow(QWidget* widget)
 {
@@ -10,6 +12,11 @@ void Utils::setDropShadow(QWidget* widget)
 	shadow->setBlurRadius(5);
     shadow->setOffset(0, 0);
     widget->setGraphicsEffect(shadow);
+}
+
+QPixmap Utils::toRoundPixmap(const QPixmap& pixmap, int radius)
+{
+	return QPixmap();
 }
 
 Utils::Utils()

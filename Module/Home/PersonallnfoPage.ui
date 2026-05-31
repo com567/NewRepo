@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
    <widget class="QToolButton" name="closeBtn">
     <property name="geometry">
@@ -63,7 +63,7 @@ border:none;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">border:2px solid rgb(220,220,230);</string>
     </property>
     <widget class="QWidget" name="user_data" native="true">
      <property name="geometry">
@@ -81,6 +81,9 @@ border:none;
 #user_data .QPushButton{
 	border:none;
 	
+}
+#user_data .QLabel{
+	border:none;
 }</string>
      </property>
      <widget class="QLabel" name="label_8">
@@ -96,65 +99,65 @@ border:none;
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;账号&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="user_name">
       <property name="geometry">
        <rect>
-        <x>99</x>
+        <x>69</x>
         <y>9</y>
-        <width>54</width>
-        <height>16</height>
+        <width>101</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="label_9">
+     <widget class="QLabel" name="gender">
       <property name="geometry">
        <rect>
-        <x>99</x>
+        <x>89</x>
         <y>46</y>
-        <width>54</width>
-        <height>16</height>
+        <width>81</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="label_10">
+     <widget class="QLabel" name="date_birth">
       <property name="geometry">
        <rect>
-        <x>99</x>
+        <x>79</x>
         <y>82</y>
-        <width>54</width>
-        <height>16</height>
+        <width>91</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="label_11">
+     <widget class="QLabel" name="phone_number">
       <property name="geometry">
        <rect>
-        <x>99</x>
+        <x>79</x>
         <y>119</y>
-        <width>54</width>
-        <height>16</height>
+        <width>91</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -173,17 +176,17 @@ border:none;
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;创建时间&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_14">
+     <widget class="QLabel" name="creation_time">
       <property name="geometry">
        <rect>
-        <x>99</x>
+        <x>69</x>
         <y>155</y>
-        <width>54</width>
-        <height>16</height>
+        <width>101</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -202,17 +205,17 @@ border:none;
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;上线时间&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_16">
+     <widget class="QLabel" name="online_time">
       <property name="geometry">
        <rect>
-        <x>99</x>
+        <x>69</x>
         <y>192</y>
-        <width>54</width>
-        <height>16</height>
+        <width>101</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -231,23 +234,23 @@ border:none;
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;状态&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_12">
+     <widget class="QLabel" name="user_state">
       <property name="geometry">
        <rect>
-        <x>99</x>
+        <x>79</x>
         <y>228</y>
-        <width>54</width>
-        <height>16</height>
+        <width>91</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="birthBtn">
       <property name="geometry">
        <rect>
         <x>7</x>
@@ -263,7 +266,7 @@ border:none;
        <string>生日</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="genderBtn">
       <property name="geometry">
        <rect>
         <x>7</x>
@@ -279,7 +282,7 @@ border:none;
        <string>性别</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="phoneBtn">
       <property name="geometry">
        <rect>
         <x>9</x>
@@ -296,30 +299,37 @@ border:none;
       </property>
      </widget>
     </widget>
-    <widget class="QLabel" name="avatar">
+    <widget class="QPushButton" name="nick_name">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>110</y>
+       <width>101</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="avatar">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>10</y>
        <width>101</width>
-       <height>81</height>
+       <height>91</height>
       </rect>
      </property>
-     <property name="text">
-      <string>头像</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="nick_name">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>100</y>
-       <width>101</width>
-       <height>31</height>
-      </rect>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+image: url(:/Resources/man.jpg);</string>
      </property>
      <property name="text">
-      <string>昵称</string>
+      <string/>
      </property>
     </widget>
    </widget>

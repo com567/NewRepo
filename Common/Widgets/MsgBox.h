@@ -35,10 +35,5 @@ signals:
 private:
 	Ui::MsgBoxClass *ui;
 	IconType m_IconType;
-	//QPixmap m_iconPixmap; // 原始图标，用于按字体大小缩放
-
-	// 根据当前文本字体调整并设置图标到 ui->Icon
-	/*void updateIconScaled();*/
-	
 };
 

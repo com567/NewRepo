@@ -2,7 +2,6 @@
 
 #include <QWidget>
 #include "ui_HomePage.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class HomePageClass; };
 QT_END_NAMESPACE

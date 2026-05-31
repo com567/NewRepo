@@ -1,5 +1,7 @@
 #pragma noce
 #include<QString>
+
+
 struct User{
     qint32  id;
     QString userName;

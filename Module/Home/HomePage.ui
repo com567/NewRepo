@@ -284,12 +284,11 @@ background-color: rgb(255, 255, 255);
                 <height>80</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">image: url(:/Resources/man.jpg);</string>
+              </property>
               <property name="text">
                <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../Resource.qrc">
-                <normaloff>:/Resources/man.jpg</normaloff>:/Resources/man.jpg</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -310,7 +309,21 @@ background-color: rgb(255, 255, 255);
            <property name="currentIndex">
             <number>1</number>
            </property>
-           <widget class="PersonallnfoPage" name="personlinfopage"/>
+           <widget class="PersonallnfoPage" name="personlinfopage">
+            <widget class="QPushButton" name="pushButton_6">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>81</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>PushButton</string>
+             </property>
+            </widget>
+           </widget>
            <widget class="QWidget" name="mainpage"/>
           </widget>
          </item>

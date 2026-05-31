@@ -29,7 +29,7 @@ private:
 	QWidget* m_viewPort{};
 	QWidget* m_popWidget{};
 	QWidgetSet m_widgetSet;
-	QColor m_backgroundColor{205,205,205,100};
+	QColor m_backgroundColor{122,122,122,255};
 	//防止出现重复添加
 	void addWidget(QWidget*w);
 };

@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->setupUi(this);
 	setAttribute(Qt::WA_StyledBackground);
 	NotifyTipManager::instance()->setViewPort(this);
+	ui->stackedWidget->setCurrentWidget(ui->LoginPageContainer);
 	connect(ui->Loginpage, &LoginPage::sig_login_finished, this, 
 		[this] {
 			ui->stackedWidget->setCurrentWidget(ui->HomePageContainer);

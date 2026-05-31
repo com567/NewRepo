@@ -25,6 +25,11 @@ set(PROJECT_SOURCES
     main.cpp
     Resource.qrc
     HdyStudentManager.rc
+    MainWindow.ui
+    MainWindow.h
+    MainWindow.cpp
+    ContextHolder.h
+    ContextHolder.cpp
 
     Module/Login/LoginPage.ui
     Module/Login/LoginPage.h
@@ -35,11 +40,7 @@ set(PROJECT_SOURCES
     Module/Home/PersonallnfoPage.ui
     Module/Home/PersonallnfoPage.h
     Module/Home/PersonallnfoPage.cpp
-
-
-    MainWindow.ui
-    MainWindow.h
-    MainWindow.cpp
+    
 
     Common/Notify/NotifyTipBox.h
     Common/Notify/NotifyTipBox.cpp
