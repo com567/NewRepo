@@ -264,13 +264,6 @@ background-color: rgb(255, 255, 255);
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="User_name">
-              <property name="text">
-               <string>用户名</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="HoverButton" name="Head_portrait">
               <property name="minimumSize">
                <size>
@@ -307,9 +300,9 @@ background-color: rgb(255, 255, 255);
             <string notr="true"/>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
-           <widget class="PersonallnfoPage" name="personlinfopage">
+           <widget class="QWidget" name="personlinfopage">
             <widget class="QPushButton" name="pushButton_6">
              <property name="geometry">
               <rect>
@@ -341,12 +334,6 @@ background-color: rgb(255, 255, 255);
    <class>HoverButton</class>
    <extends>QPushButton</extends>
    <header>Common/Widgets/HoverButton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>PersonallnfoPage</class>
-   <extends>QWidget</extends>
-   <header>Module/Home/PersonallnfoPage.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

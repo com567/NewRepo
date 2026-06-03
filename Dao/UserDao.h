@@ -1,6 +1,7 @@
 #pragma once
 #include "Common/Base/Singleton.hpp"
 #include "SqlConnection.hpp"
+#include "ContextHolder.h"
 #include "DatabaseMap.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -12,8 +13,7 @@ class UserDao : public Singleton<UserDao>
 public:
 	UserDao();
 	~UserDao();
-	//严重性	代码	说明	项目	文件	行	抑制状态	详细信息
-	//错误	C2061	语法错误 : 标识符“LoginPage”	D : \_Q2026\HdyStudentManager\out\build\debug\HdyStudentManager	D : \_Q2026\HdyStudentManager\out\build\debug\HdyStudentManager_autogen\include\ui_MainWindow.h	49
+	
 
 	/*void static printUser(const std::shared_ptr<User>& user) {
 		if (!user) {

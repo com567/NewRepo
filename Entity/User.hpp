@@ -1,4 +1,4 @@
-#pragma noce
+#pragma once
 #include<QString>
 
 
@@ -7,7 +7,7 @@ struct User{
     QString userName;
     QString nickName;
     QString password;
-    QString gender;
+    qint8 gender{0};
     QString dateBirth;
     QString avatar;
     QString creationTime;

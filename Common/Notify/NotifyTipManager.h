@@ -19,6 +19,7 @@ public:
 	QWidget* ViewPort() const;
 
 	NotifyTipBox* addNotifyTip(NotifyTipBox::Message_type type = NotifyTipBox::Login_successfully);
+	NotifyTipBox* addNotifyTip(NotifyTipBox::IconType type,QString call_word);
 	NotifyTipBox* addNotifyTip(qint32 delay,NotifyTipBox::Message_type type = NotifyTipBox::Login_successfully);
 	NotifyTipBox* addNotifyTip(NotifyTipBox& tip);
 

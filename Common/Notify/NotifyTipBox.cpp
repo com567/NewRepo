@@ -71,6 +71,12 @@ NotifyTipBox::NotifyTipBox(Message_type type,qint32 delay,QWidget* parent)
 	}
 }
 
+NotifyTipBox::NotifyTipBox(IconType type, QString call_word, QWidget* parent)
+	:NotifyTipBox(Login_failure,1500,parent)
+{
+	seticonType(type, call_word);
+}
+
 NotifyTipBox::NotifyTipBox(Message_type type,QWidget* parent)
 	:NotifyTipBox(type,1500,parent)
 {
@@ -103,6 +109,30 @@ void NotifyTipBox::setMessage_type(Message_type type)
 void NotifyTipBox::setTipData(TipData& data)
 {
     m_data = data;
+}
+
+void NotifyTipBox::seticonType(IconType type, QString call_word)
+{
+	if (type == IconType::Warning) {
+		m_data.backgroundColor = QColor(255, 255, 205);
+		m_data.borderColor = QColor(255, 165, 5);
+		m_data.textColor = QColor(255, 205, 32);
+		m_data.icon = QPixmap(":/Resources/warn_close.svg");
+	}
+	else if (type == IconType::Error) {
+		m_data.backgroundColor = QColor(255, 210, 210);
+		m_data.borderColor = QColor(255, 50, 60);
+		m_data.textColor = QColor(255, 20, 20);
+		m_data.icon = QPixmap(":/Resources/tip_close.svg");
+	}
+	else if (type == IconType::Success) {
+		m_data.backgroundColor = QColor(220, 255, 225);
+		m_data.borderColor = QColor(40, 255, 40);
+		m_data.textColor = QColor(0, 255, 10);
+		m_data.icon = QPixmap(":/Resources/succeed_close.svg");
+	}
+	else return;
+	m_data.msg = call_word;
 }
 
 TipData NotifyTipBox::getTipData() const
@@ -211,7 +241,7 @@ void NotifyTipBox::End_animate()
 void NotifyTipBox::closeEvent(QCloseEvent* event)
 {
 	emit disappeared(this);
-	event->ignore();
+	event->accept();
 }
 
 void NotifyTipBox::paintEvent(QPaintEvent* event)

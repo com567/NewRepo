@@ -13,6 +13,12 @@ void ClickLabel::click()
     emit clicked();
 }
 
+void ClickLabel::enterEvent(QEnterEvent* event)
+{
+    setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
+    QLabel::enterEvent(event);
+}
+
 void ClickLabel::mousePressEvent(QMouseEvent * event)
 {
 	if (event->button() == Qt::LeftButton) {

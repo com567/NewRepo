@@ -2,6 +2,8 @@
 
 #include <QWidget>
 #include "ui_HomePage.h"
+
+class NotifyTipManager;
 QT_BEGIN_NAMESPACE
 namespace Ui { class HomePageClass; };
 QT_END_NAMESPACE
@@ -19,6 +21,7 @@ signals:
 
 private:
 	Ui::HomePageClass *ui;
+	NotifyTipManager *notifyTipManager;
 	QMenu* m_personalMenu{};
 	void initPersonalMenu();
 };

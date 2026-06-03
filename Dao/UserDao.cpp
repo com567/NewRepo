@@ -79,29 +79,71 @@ bool UserDao::modify_password(const QString& account, const QString& new_passwor
 bool UserDao::modify_nickName(const QString& nick_name, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    return false;
+    auto user = ContextHolder::instance()->getSelf();
+    query.prepare("UPDATE Taoist_temple_user SET nick_name = ? WHERE id = ?");
+    query.bindValue(0, nick_name);
+    query.bindValue(1, user->id);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return false;
+    }
+    return true;
 }
 
 bool UserDao::modify_avatar(const QString& avatar, const QSqlDatabase& con)
 {
-    return false;
+    QSqlQuery query(con);
+    auto user = ContextHolder::instance()->getSelf();
+    query.prepare("UPDATE Taoist_temple_user SET avatar = ? WHERE id = ?");
+    query.bindValue(0, avatar);
+    query.bindValue(1, user->id);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return false;
+    }
+    return true;
 }
 
 bool UserDao::modify_dateBirth(const QString& date_birth, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    return false;
+    auto user = ContextHolder::instance()->getSelf();
+    query.prepare("UPDATE Taoist_temple_user SET date_birth = ? WHERE id = ?");
+    query.bindValue(0, date_birth);
+    query.bindValue(1, user->id);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return false;
+    }
+    return true;
 }
 
 bool UserDao::modify_gender(const QString& gender, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    return false;
+    auto user = ContextHolder::instance()->getSelf();
+    query.prepare("UPDATE Taoist_temple_user SET gender = ? WHERE id = ?");
+    query.bindValue(0, gender);
+    query.bindValue(1, user->id);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return false;
+    }
+    return true;
 }
 
 bool UserDao::modify_phoneNumber(const QString& phone_number, const QSqlDatabase& con)
 {
-    return false;
+    QSqlQuery query(con);
+    auto user = ContextHolder::instance()->getSelf();
+    query.prepare("UPDATE Taoist_temple_user SET phone_number = ? WHERE id = ?");
+    query.bindValue(0, phone_number);
+    query.bindValue(1, user->id);
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        return false;
+    }
+    return true;
 }
 
 bool UserDao::delete_user(const QString& password, const QSqlDatabase& con)

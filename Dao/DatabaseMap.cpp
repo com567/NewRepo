@@ -9,7 +9,12 @@ namespace orm {
 				user->userName=query.value("user_name").toString();
 				user->nickName=query.value("nick_name").toString();
 				user->password=query.value("password").toString();
-				user->gender=query.value("gender").toString();
+				if(query.value("gender").toString()=="男")
+				user->gender=1;
+                else if(query.value("gender").toString()=="女")
+                user->gender=2;
+				else
+				user->gender=0;
 				user->dateBirth=query.value("date_birth").toString();
 				user->avatar=query.value("avatar").toString();
 				user->creationTime=query.value("creation_time").toString();

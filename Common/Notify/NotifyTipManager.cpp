@@ -42,7 +42,16 @@ QWidget* NotifyTipManager::ViewPort() const
 NotifyTipBox* NotifyTipManager::addNotifyTip(NotifyTipBox::Message_type type)
 {
 	auto T=m_notifyTips.emplaceBack(new NotifyTipBox(type));
+	// 在 addNotifyTip(...) 开头加
+	qDebug() << "addNotifyTip called, type=" << type << " viewport=" << (void*)m_viewPort << " tipptr=" << T;
 	emit newNotifyTip(T,m_notifyTips.size()-1);
+	return T;
+}
+
+NotifyTipBox* NotifyTipManager::addNotifyTip(NotifyTipBox::IconType type, QString call_word)
+{
+    auto T=m_notifyTips.emplaceBack(new NotifyTipBox(type,call_word));
+    emit newNotifyTip(T,m_notifyTips.size()-1);
 	return T;
 }
 
@@ -109,16 +118,17 @@ QPoint NotifyTipManager::m_notifyPos() const
 void NotifyTipManager::slot_newNotifyTip(NotifyTipBox* tip, int index) {
 	if (!ViewPort())
 	{
-		qDebug() << "ViewPort is null";
 		return;
 	}
-
 		tip->setParent(m_viewPort);
 		tip->setFixedSize(m_notifyTipSize);
 		tip->move(m_notifyPos());
-
 		tip->show();
-		
-		tip->Begin_animate();	 
+			
+	connect(tip, &NotifyTipBox::disappeared, this, [this, tip]() {
+		m_notifyTips.removeOne(tip);
+		tip->deleteLater();
+		},Qt::QueuedConnection);
+		tip->Begin_animate(); 
 }
 

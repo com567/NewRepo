@@ -115,22 +115,6 @@ border:none;
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="gender">
-      <property name="geometry">
-       <rect>
-        <x>89</x>
-        <y>46</y>
-        <width>81</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-      </property>
-     </widget>
      <widget class="QLabel" name="date_birth">
       <property name="geometry">
        <rect>
@@ -250,38 +234,6 @@ border:none;
        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="birthBtn">
-      <property name="geometry">
-       <rect>
-        <x>7</x>
-        <y>80</y>
-        <width>31</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 10pt &quot;Microsoft YaHei UI&quot;;</string>
-      </property>
-      <property name="text">
-       <string>生日</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="genderBtn">
-      <property name="geometry">
-       <rect>
-        <x>7</x>
-        <y>40</y>
-        <width>31</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">font: 10pt &quot;Microsoft YaHei UI&quot;;</string>
-      </property>
-      <property name="text">
-       <string>性别</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="phoneBtn">
       <property name="geometry">
        <rect>
@@ -298,24 +250,65 @@ border:none;
        <string>手机号</string>
       </property>
      </widget>
+     <widget class="QComboBox" name="genderBtn">
+      <property name="geometry">
+       <rect>
+        <x>131</x>
+        <y>45</y>
+        <width>41</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;</string>
+      </property>
+      <item>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>男</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>女</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>45</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;性别&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="ClickLabel" name="birth">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:none;</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;生日&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QPushButton" name="nick_name">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>110</y>
-       <width>101</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="avatar">
+    <widget class="HoverButton" name="avatar">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -326,16 +319,45 @@ border:none;
      </property>
      <property name="styleSheet">
       <string notr="true">border:none;
-image: url(:/Resources/man.jpg);</string>
+
+</string>
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nick_name">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>161</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
    </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>HoverButton</class>
+   <extends>QPushButton</extends>
+   <header>Common/Widgets/HoverButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ClickLabel</class>
+   <extends>QLabel</extends>
+   <header>Common/Widgets/ClickLabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../Resource.qrc"/>
  </resources>

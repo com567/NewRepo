@@ -10,7 +10,10 @@ public:
 	~ClickLabel();
 	void click();
 protected:
-	
+
+
+	//鼠标悬停事件
+	void enterEvent(QEnterEvent *event) override;
 	// 鼠标点击事件
     void mousePressEvent(QMouseEvent *event) override;
     // 鼠标释放事件
