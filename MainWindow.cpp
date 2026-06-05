@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(ui->Homepage, &HomePage::sig_quit_login, this, 
 		[this] {
 			ui->stackedWidget->setCurrentWidget(ui->LoginPageContainer);
-
+			NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::IconType::Success,"退出成功");
 		});
 
 }

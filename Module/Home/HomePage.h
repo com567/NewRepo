@@ -21,7 +21,6 @@ signals:
 
 private:
 	Ui::HomePageClass *ui;
-	NotifyTipManager *notifyTipManager;
 	QMenu* m_personalMenu{};
 	void initPersonalMenu();
 };

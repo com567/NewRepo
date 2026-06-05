@@ -8,8 +8,8 @@ HomePage::HomePage(QWidget *parent)
 	ui->setupUi(this);
 	setAttribute(Qt::WA_StyledBackground);
 	ui->Content->setCurrentWidget(ui->mainpage);
-	notifyTipManager = NotifyTipManager::instance();
-	notifyTipManager->setViewPort(this);
+	NotifyTipManager::instance()->setViewPort(this);
+	
 	initPersonalMenu();
 	connect(ui->Head_portrait, &HoverButton::enter, this, [this]() {
 		if(m_personalMenu->isHidden())
@@ -39,14 +39,14 @@ void HomePage::initPersonalMenu()
 		});
 	m_personalMenu->addSeparator();
 	m_personalMenu->addAction("实名认证", [this] {
-		notifyTipManager->addNotifyTip(NotifyTipBox::IconType::Warning, "实名认证功能暂未开放");
+		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::IconType::Warning, "实名认证功能暂未开放");
 		});
     m_personalMenu->addSeparator();
 	m_personalMenu->addAction("安全设置");
 	m_personalMenu->addSeparator();
 	m_personalMenu->addAction("帮助与反馈");
     m_personalMenu->addSeparator();
-	m_personalMenu->addAction("退出登录",this, &HomePage::sig_quit_login);
+	m_personalMenu->addAction("退出登录", [this] {emit sig_quit_login(); });
 
 }
 

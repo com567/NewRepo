@@ -1,5 +1,3 @@
-
-#include "Common/Utils/Coating.h"
 #include "Service/UserService.h"
 #include "Common/Utils/Utils.h"
 #include "PersonallnfoPage.h"
@@ -13,21 +11,15 @@ PersonallnfoPage::PersonallnfoPage(QWidget* parent)
 {
 	ui->setupUi(this);
 	ui->avatar->setMakLayer(true);
-
 	Utils::setDropShadow(this);
-	Coating::instance()->setViewPort(this);
-	Coating::instance()->popup(ui->Function_zone);
-	m_notifyTipManager = NotifyTipManager::instance();
-	m_notifyTipManager->setViewPort(this);
-
+	NotifyTipManager::instance()->setViewPort(ui->Function_zone);
 
 	setWindowFlag(Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	setUser(ContextHolder::instance()->getSelf());
 
 	connect(ui->closeBtn, &QToolButton::clicked, this, [this] {this->close();});
-	/*connect(ui->avatar, &HoverButton::enter, this, [this] {ui->avatar->setMakLayer(true); });
-    connect(ui->avatar, &HoverButton::leave, this, [this] {ui->avatar->setMakLayer(false); });*/
+	connect(ui->avatar,&HoverButton::clicked, this, [this] {on_avatar_clicked(); });
 	connect(ui->nick_name,&QLineEdit::editingFinished,this,[this] {setNickName(ui->nick_name->text()); });
 	connect(ui->genderBtn, &QComboBox::currentTextChanged, this, [this] {setGender(qint8(ui->genderBtn->currentIndex())); });
 	connect(ui->birth, &ClickLabel::clicked, this, [this] {birthWidget(); });
@@ -62,24 +54,24 @@ void PersonallnfoPage::setUser(std::shared_ptr<User> user)
 void PersonallnfoPage::setAvatar(const QString& icon)
 {
 	if (!UserService::instance()->modify_avatar(icon)) {
-		m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
+		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
 		return;
 	}
 
 	ui->avatar->setIcon(QIcon(icon));
-	m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+	NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
 }
 
 void PersonallnfoPage::setNickName(const QString& nick_name)
 {
 	if (!UserService::instance()->modify_nickName(nick_name)) {
-		m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
+		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
 		return;
 	}
 
 	ui->nick_name->setText(nick_name);
 	ContextHolder::instance()->getSelf()->nickName = nick_name;
-	m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+	NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
 }
 
 void PersonallnfoPage::setGender(const qint8& gender)
@@ -94,46 +86,52 @@ void PersonallnfoPage::setGender(const qint8& gender)
 	else
 		return;
 	if (!UserService::instance()->modify_gender(genderStr)) {
-		m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
+		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
 		return;
 	}
 	ContextHolder::instance()->getSelf()->gender = gender;
-	m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+	NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
 }
 
 void PersonallnfoPage::setBirth(const QString& birth)
 {
 	
 	if (!UserService::instance()->modify_dateBirth(birth)) {
-		m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
+		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
 		return;
 	}
 
 	ui->date_birth->setText(birth);
     ContextHolder::instance()->getSelf()->dateBirth = birth;
-	m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+	NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
 }
 
 void PersonallnfoPage::setPhone(const QString& phone)
 {
 	if (!UserService::instance()->modify_phoneNumber(phone)) {
-		m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
+		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
 		return;
 	}
 
 	ui->phone_number->setText(phone);
-	m_notifyTipManager->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+	NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+}
+
+void PersonallnfoPage::resizeEvent(QResizeEvent* event)
+{
+	int x=(this->width()-ui->Function_zone->width())/2;
+	int y=(this->height()-ui->Function_zone->height())/2;
+    ui->Function_zone->move(x,y);
 }
 
 
 
-QWidget* PersonallnfoPage::avatarWidget()
-{
-	QWidget* widget = new QWidget(this);
-	QPainter painter(widget);
 
-
-	return widget;
+void PersonallnfoPage::on_avatar_clicked() {
+	
+	m_avatarChoose=new AvatarChoose(this);
+	m_avatarChoose->showMaximized();
+	
 }
 
 

@@ -48,6 +48,12 @@ set(PROJECT_SOURCES
     Common/Notify/NotifyTipManager.cpp
     Common/Widgets/ClickLabel.h
     Common/Widgets/ClickLabel.cpp
+    Common/Widgets/AvatarChoose/AvatarChoose.h
+    Common/Widgets/AvatarChoose/AvatarChoose.cpp
+    Common/Widgets/AvatarChoose/AvatarChoose.ui
+    Common/Widgets/AvatarChoose/AvatarChooseBox.h
+    Common/Widgets/AvatarChoose/AvatarChooseBox.cpp
+
     Common/Widgets/MsgBox.h
     Common/Widgets/MsgBox.cpp
     Common/Widgets/MsgBox.ui

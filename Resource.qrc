@@ -10,5 +10,11 @@
         <file>Resources/close_hover.svg</file>
         <file>Resources/false_alarm.svg</file>
         <file>Resources/qss/style.css</file>
+        <file>Resources/anticlockwise.svg</file>
+        <file>Resources/clockwise.svg</file>
+        <file>Resources/amplifier.svg</file>
+        <file>Resources/anticlockwise-fill.svg</file>
+        <file>Resources/clockwise-fill.svg</file>
+        <file>Resources/reduce.svg</file>
     </qresource>
 </RCC>

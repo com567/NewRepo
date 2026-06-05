@@ -26,8 +26,6 @@ LoginPage::LoginPage(QWidget *parent)
         {   switch_interface(ui->ForgetPassword);
             ui->User_ID->setText(config->getValue("Account/account_number").toString());
         });
-    connect(ui->RegBtn1, &QPushButton::clicked, this, [this] {});
-    connect(ui->LoginBtn1, &QPushButton::clicked, this, [this] {});
     connect(ui->verificationCode_2, &ClickLabel::clicked, this,
         [this] {
             Storage_verificationCode(ui->verificationCode_2);

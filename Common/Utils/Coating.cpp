@@ -43,7 +43,7 @@ QColor Coating::getBackgroundColor() const
 
 void Coating::popup(QWidget* w)
 {
-	if(!m_viewPort)
+	if(!m_viewPort||!w)
         return;
 
 	addWidget(w);
@@ -77,6 +77,10 @@ bool Coating::eventFilter(QObject* watched, QEvent* event)
 		{
 			this->hide();
 		}
+		else if (event->type() == QEvent::Show)
+		{
+            this->show();
+		}
 	}
 	return false;
 }
@@ -91,6 +95,7 @@ void Coating::paintEvent(QPaintEvent* event)
 
 void Coating::resizeEvent(QResizeEvent* event)
 {
+	if (!m_popWidget)return;
 	int x= (this->width()-m_popWidget->width())/2;
     int y= (this->height()-m_popWidget->height())/2;
     m_popWidget->move(x,y);

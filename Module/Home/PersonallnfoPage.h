@@ -1,9 +1,9 @@
 #pragma once
-
-#include <QWidget>
+#include "Common/Widgets/AvatarChoose/AvatarChoose.h"
 #include "Common/Notify/NotifyTipManager.h"
 #include "ui_PersonallnfoPage.h"
 #include "ContextHolder.h"
+#include <QWidget>
 struct User;
 QT_BEGIN_NAMESPACE
 namespace Ui { class PersonallnfoPageClass; };
@@ -24,13 +24,14 @@ public:
 	void setBirth(const QString& birth);
 	void setPhone(const QString& phone);
 
+public slots:
+	void on_avatar_clicked();
+protected:
+	void resizeEvent(QResizeEvent *event) override;
 private:
 	Ui::PersonallnfoPageClass *ui;
-	NotifyTipManager*m_notifyTipManager;
 	QSize iconSize{101,91};
-
-
-	QWidget*avatarWidget();
+	AvatarChoose*m_avatarChoose;
     void birthWidget();
     QWidget*phoneWidget();
 };

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AvatarChooseClass</class>
+ <widget class="QWidget" name="AvatarChooseClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>984</width>
+    <height>799</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AvatarChoose</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>120</y>
+     <width>771</width>
+     <height>541</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <widget class="QWidget" name="widget_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>40</y>
+      <width>386</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 170, 255);</string>
+    </property>
+    <widget class="QPushButton" name="chooseBtn">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>450</y>
+       <width>81</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#chooseBtn:hover{
+	background-color: rgb(85, 170, 255);
+}</string>
+     </property>
+     <property name="text">
+      <string>选择</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="anticlockwise">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>450</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#anticlockwise{
+	
+	image: url(:/Resources/anticlockwise.svg);
+}
+#anticlockwise:hover{
+image: url(:/Resources/anticlockwise.svg);
+	background-color: rgb(85, 170, 255);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clockwise">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>450</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#clockwise{
+image: url(:/Resources/clockwise.svg);
+}
+#clockwise:hover{
+	image: url(:/Resources/clockwise.svg);
+	background-color: rgb(85, 170, 255);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clockwise_fill">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>450</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#clockwise_fill{
+image: url(:/Resources/clockwise-fill.svg);
+}
+#clockwise_fill:hover{
+image: url(:/Resources/clockwise-fill.svg);
+	background-color: rgb(85, 170, 255);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="anticlockwise_fill">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>450</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#anticlockwise_fill{
+image: url(:/Resources/anticlockwise-fill.svg);
+}
+#anticlockwise_fill:hover{
+image: url(:/Resources/anticlockwise-fill.svg);
+	background-color: rgb(85, 170, 255);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="amplifier">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>90</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#amplifier{
+	image: url(:/Resources/amplifier.svg);
+}
+#amplifier:hover{
+	
+	background-color: rgb(85, 170, 255);
+	image: url(:/Resources/amplifier.svg);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reduce">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>290</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#reduce{
+	image: url(:/Resources/reduce.svg);
+}
+#reduce:hover{
+	image: url(:/Resources/reduce.svg);
+	
+	background-color: rgb(85, 170, 255);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="AvatarChooseBox" name="avatarCropper" native="true">
+     <property name="geometry">
+      <rect>
+       <x>89</x>
+       <y>89</y>
+       <width>221</width>
+       <height>221</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widget_3" native="true">
+    <property name="geometry">
+     <rect>
+      <x>386</x>
+      <y>40</y>
+      <width>385</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(85, 255, 255);</string>
+    </property>
+    <widget class="QLabel" name="avatar">
+     <property name="geometry">
+      <rect>
+       <x>89</x>
+       <y>89</y>
+       <width>221</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>450</y>
+       <width>81</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>确定</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="close">
+    <property name="geometry">
+     <rect>
+      <x>745</x>
+      <y>0</y>
+      <width>24</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#close{
+border:none;
+image: url(:/Resources/close.svg);
+}
+#close:hover{
+	image: url(:/Resources/close_hover.svg);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;修改头像&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>AvatarChooseBox</class>
+   <extends>QWidget</extends>
+   <header>Common/Widgets/AvatarChoose/AvatarChooseBox.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../Resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
