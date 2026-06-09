@@ -63,15 +63,6 @@ void HoverButton::paintEvent(QPaintEvent* event)
 {
 	QPainter painter(this);
 	painter.drawPixmap(rect(),m_avatarIcon.pixmap(rect().size()));
-	//if (m_MakLayer) {
-	//	painter.fillRect(rect(),QColor(122, 122, 122, 255));
-	//	/*if (!m_avatarIcon.isNull()) {
-	//		int x = width() / 2 - m_avatarIcon.pixmap(rect().size()).width() / 2;
-	//		int y = height() / 2 - m_avatarIcon.pixmap(rect().size()).height() / 2;
-	//		painter.drawPixmap(x, y, m_avatarIcon.pixmap(rect().size()));
-	//	}
-	//	else return;*/
-	//}
 
 }
 

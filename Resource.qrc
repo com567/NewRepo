@@ -16,5 +16,7 @@
         <file>Resources/anticlockwise-fill.svg</file>
         <file>Resources/clockwise-fill.svg</file>
         <file>Resources/reduce.svg</file>
+        <file>Resources/transparent.png</file>
+        <file>Resources/tailor.svg</file>
     </qresource>
 </RCC>

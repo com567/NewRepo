@@ -13,10 +13,13 @@ void ClickLabel::click()
     emit clicked();
 }
 
+
+
 void ClickLabel::enterEvent(QEnterEvent* event)
 {
     setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
     QLabel::enterEvent(event);
+    emit enter();
 }
 
 void ClickLabel::mousePressEvent(QMouseEvent * event)

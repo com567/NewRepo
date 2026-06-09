@@ -308,24 +308,6 @@ border:none;
       </property>
      </widget>
     </widget>
-    <widget class="HoverButton" name="avatar">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>10</y>
-       <width>101</width>
-       <height>91</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;
-
-</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="nick_name">
      <property name="geometry">
       <rect>
@@ -342,16 +324,24 @@ border:none;
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
+    <widget class="ClickLabel" name="avatar">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>10</y>
+       <width>101</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>HoverButton</class>
-   <extends>QPushButton</extends>
-   <header>Common/Widgets/HoverButton.h</header>
-  </customwidget>
   <customwidget>
    <class>ClickLabel</class>
    <extends>QLabel</extends>

@@ -16,6 +16,8 @@ public:
 	HomePage(QWidget *parent = nullptr);
 	~HomePage();
 
+	void AvatarChanged();
+
 signals:
 	void sig_quit_login();
 

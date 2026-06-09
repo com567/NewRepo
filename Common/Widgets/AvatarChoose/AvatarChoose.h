@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QWidget>
+#include "ContextHolder.h"
+#include "Entity/User.hpp"
 #include "ui_AvatarChoose.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,11 +20,17 @@ public:
 public slots:
 	void on_chooseBtn_clicked();	
 
+signals:
+	void sig_avatar_affirm(QPixmap&);
+	void sig_avatar_path(QString&);
+
 protected:
 	void resizeEvent(QResizeEvent* event) override;
 
 private:
 	
 	Ui::AvatarChooseClass *ui;
+	QString m_path{ContextHolder::instance()->getSelf()->avatar};
+	float m_ratio;
 };
 

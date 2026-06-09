@@ -18,7 +18,8 @@ public:
 	PersonallnfoPage(QWidget *parent = nullptr);
 	~PersonallnfoPage();
 	void setUser(std::shared_ptr<User>user);
-	void setAvatar(const QString& icon);
+	void setAvatarPath(const QString& icon);
+	void setAvatar(const QPixmap& pix);
 	void setNickName(const QString& nick_name);
 	void setGender(const qint8& gender);
 	void setBirth(const QString& birth);
@@ -30,7 +31,6 @@ protected:
 	void resizeEvent(QResizeEvent *event) override;
 private:
 	Ui::PersonallnfoPageClass *ui;
-	QSize iconSize{101,91};
 	AvatarChoose*m_avatarChoose;
     void birthWidget();
     QWidget*phoneWidget();

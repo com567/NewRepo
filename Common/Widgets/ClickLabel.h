@@ -20,7 +20,9 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
 signals:
 	void clicked();
+	void enter();
 private:
 	bool m_pressed{false};
+	QPixmap m_pixmap;
 };
 

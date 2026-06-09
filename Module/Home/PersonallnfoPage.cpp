@@ -10,7 +10,7 @@ PersonallnfoPage::PersonallnfoPage(QWidget* parent)
 	, ui(new Ui::PersonallnfoPageClass())
 {
 	ui->setupUi(this);
-	ui->avatar->setMakLayer(true);
+	//ui->avatar->setMakLayer(true);
 	Utils::setDropShadow(this);
 	NotifyTipManager::instance()->setViewPort(ui->Function_zone);
 
@@ -18,11 +18,12 @@ PersonallnfoPage::PersonallnfoPage(QWidget* parent)
 	setAttribute(Qt::WA_TranslucentBackground);
 	setUser(ContextHolder::instance()->getSelf());
 
+	connect(ui->birth, &ClickLabel::clicked, this, [this] {birthWidget(); });
 	connect(ui->closeBtn, &QToolButton::clicked, this, [this] {this->close();});
-	connect(ui->avatar,&HoverButton::clicked, this, [this] {on_avatar_clicked(); });
+	connect(ui->avatar,&ClickLabel::clicked, this, [this] {on_avatar_clicked(); });
 	connect(ui->nick_name,&QLineEdit::editingFinished,this,[this] {setNickName(ui->nick_name->text()); });
 	connect(ui->genderBtn, &QComboBox::currentTextChanged, this, [this] {setGender(qint8(ui->genderBtn->currentIndex())); });
-	connect(ui->birth, &ClickLabel::clicked, this, [this] {birthWidget(); });
+	
 }
 
 PersonallnfoPage::~PersonallnfoPage()
@@ -34,14 +35,12 @@ void PersonallnfoPage::setUser(std::shared_ptr<User> user)
 {
 	if (!user)return;
 	if (user->avatar.isEmpty()) {
-		
-		ui->avatar->setAvatarIcon(QIcon(":/Resources/man.jpg"));
-		ui->avatar->setAvatarIconSize(iconSize);
+		ui->avatar->setPixmap(QPixmap(":/Resources/man.jpg"));
+		ui->avatar->setScaledContents(true);
 	}
 	else
-	ui->avatar->setAvatarIcon(QIcon(user->avatar));
-
-	ui->avatar->setIconSize(iconSize);
+	ui->avatar->setPixmap(QPixmap(user->avatar));
+	ui->avatar->setScaledContents(true);
 	ui->nick_name->setText(user->nickName);
 	ui->user_name->setText(user->userName);
 	ui->genderBtn->setCurrentIndex(user->gender);
@@ -51,14 +50,18 @@ void PersonallnfoPage::setUser(std::shared_ptr<User> user)
 	ui->online_time->setText(user->onlineTime);
 }
 
-void PersonallnfoPage::setAvatar(const QString& icon)
+void PersonallnfoPage::setAvatarPath(const QString& icon)
 {
 	if (!UserService::instance()->modify_avatar(icon)) {
 		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
-		return;
+		return ;
 	}
+	ContextHolder::instance()->getSelf()->avatar = icon;
+}
 
-	ui->avatar->setIcon(QIcon(icon));
+void PersonallnfoPage::setAvatar(const QPixmap& pix)
+{
+	ui->avatar->setPixmap(pix);
 	NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
 }
 
@@ -130,6 +133,15 @@ void PersonallnfoPage::resizeEvent(QResizeEvent* event)
 void PersonallnfoPage::on_avatar_clicked() {
 	
 	m_avatarChoose=new AvatarChoose(this);
+	connect(m_avatarChoose, &AvatarChoose::sig_avatar_affirm,this,
+		[this](QPixmap& pix) {
+				setAvatar(pix);
+		});
+	connect(m_avatarChoose, &AvatarChoose::sig_avatar_path, this,
+		[this](QString& path) {
+			setAvatarPath(path);
+		});
+
 	m_avatarChoose->showMaximized();
 	
 }
