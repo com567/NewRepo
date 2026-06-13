@@ -25,15 +25,13 @@ AvatarChoose::AvatarChoose(QWidget *parent)
 	connect(ui->affirmBtn, &QPushButton::clicked, this, [this] 
 		{
 		 QPixmap p = ui->avatar->pixmap();
-		 QString path = m_path;
-			if (!p.isNull()&&!path.isNull()) {
+			if (!p.isNull()) {
 				// 发射按 const QPixmap& 的信号（已在头文件修改）
 				emit sig_avatar_affirm(p);
-				emit sig_avatar_path(path);
 			}
-            close();
-			ui->close->clicked();
-		;});
+			this->close();
+			this->deleteLater();
+		});
 }
 
 AvatarChoose::~AvatarChoose()
@@ -54,6 +52,6 @@ void AvatarChoose::resizeEvent(QResizeEvent* event)
 void AvatarChoose::on_chooseBtn_clicked() {
 	auto filename = QFileDialog::getOpenFileName(this, "选择图片", "./", "Image Files(*.png *.jpg *.bmp)");
 	if (filename.isEmpty())return;
-	m_path=filename;
-	ui->avatarCropper->setPixmap(QPixmap(m_path));
+	//m_path=filename;
+	ui->avatarCropper->setPixmap(filename);
 }

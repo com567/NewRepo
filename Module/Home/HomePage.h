@@ -17,7 +17,8 @@ public:
 	~HomePage();
 
 	void AvatarChanged();
-
+protected:
+	void resizeEvent(QResizeEvent *event) override;
 signals:
 	void sig_quit_login();
 

@@ -37,9 +37,9 @@ set(PROJECT_SOURCES
     Module/Home/HomePage.ui
     Module/Home/HomePage.h
     Module/Home/HomePage.cpp
-    Module/Home/PersonallnfoPage.ui
-    Module/Home/PersonallnfoPage.h
-    Module/Home/PersonallnfoPage.cpp
+    Module/Home/Personallnfo/PersonallnfoPage.ui
+    Module/Home/Personallnfo/PersonallnfoPage.h
+    Module/Home/Personallnfo/PersonallnfoPage.cpp
     
 
     Common/Notify/NotifyTipBox.h

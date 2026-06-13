@@ -1,4 +1,6 @@
 #pragma once
+#include"Common/Config/Config.h"
+#include<QPixmap>
 #include<QString>
 
 
@@ -17,4 +19,14 @@ struct User{
     QString phoneNumber;
     qint8 user_state;
     qint8 is_unsubscribe;
+    QPixmap _pixmap;
+    QPixmap avatarPixmap() {
+        if (avatar.isEmpty()) 
+            _pixmap.load(":/image/defaultAvatar.png");
+        
+        else 
+            _pixmap.load(Config::instance()->profilePath() + "/" + avatar);
+
+        return _pixmap; 
+    }
 };

@@ -228,10 +228,25 @@ background-color: rgb(255, 255, 255);
 }</string>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>9</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>TextLabel</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;搜索&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -251,7 +266,7 @@ background-color: rgb(255, 255, 255);
             <item>
              <widget class="ClickLabel" name="Head_portrait">
               <property name="text">
-               <string>用户头像</string>
+               <string/>
               </property>
              </widget>
             </item>

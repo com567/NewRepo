@@ -4,13 +4,14 @@
 #include "Entity/User.hpp"
 #include <QCalendarWidget>
 #include <QPainter>
+#include <QBuffer>
+#include <QThread>
 
 PersonallnfoPage::PersonallnfoPage(QWidget* parent)
 	: QWidget(parent)
 	, ui(new Ui::PersonallnfoPageClass())
 {
 	ui->setupUi(this);
-	//ui->avatar->setMakLayer(true);
 	Utils::setDropShadow(this);
 	NotifyTipManager::instance()->setViewPort(ui->Function_zone);
 
@@ -36,10 +37,11 @@ void PersonallnfoPage::setUser(std::shared_ptr<User> user)
 	if (!user)return;
 	if (user->avatar.isEmpty()) {
 		ui->avatar->setPixmap(QPixmap(":/Resources/man.jpg"));
-		ui->avatar->setScaledContents(true);
 	}
-	else
-	ui->avatar->setPixmap(QPixmap(user->avatar));
+	else {
+		auto path= Config::instance()->profilePath() + "/" + user->avatar;
+		ui->avatar->setPixmap(QPixmap(path));
+	}
 	ui->avatar->setScaledContents(true);
 	ui->nick_name->setText(user->nickName);
 	ui->user_name->setText(user->userName);
@@ -50,19 +52,12 @@ void PersonallnfoPage::setUser(std::shared_ptr<User> user)
 	ui->online_time->setText(user->onlineTime);
 }
 
-void PersonallnfoPage::setAvatarPath(const QString& icon)
-{
-	if (!UserService::instance()->modify_avatar(icon)) {
-		NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_failure);
-		return ;
-	}
-	ContextHolder::instance()->getSelf()->avatar = icon;
-}
 
 void PersonallnfoPage::setAvatar(const QPixmap& pix)
 {
 	ui->avatar->setPixmap(pix);
 	NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::modify_successfully);
+	emit sig_avatar_update(pix);
 }
 
 void PersonallnfoPage::setNickName(const QString& nick_name)
@@ -133,13 +128,18 @@ void PersonallnfoPage::resizeEvent(QResizeEvent* event)
 void PersonallnfoPage::on_avatar_clicked() {
 	
 	m_avatarChoose=new AvatarChoose(this);
+	auto user = ContextHolder::instance()->getSelf();
+	if(!user||m_avatarChoose==nullptr)return;
 	connect(m_avatarChoose, &AvatarChoose::sig_avatar_affirm,this,
-		[this](QPixmap& pix) {
+		[this,user](QPixmap& pix) {
 				setAvatar(pix);
-		});
-	connect(m_avatarChoose, &AvatarChoose::sig_avatar_path, this,
-		[this](QString& path) {
-			setAvatarPath(path);
+				QBuffer buffer;
+				if(!pix.save(&buffer, "jpg"))return;
+				auto tread = QThread::create([id=user->id,data=buffer.data()] {
+					UserService::instance()->modify_avatar(id,data);
+				});
+				tread->start();
+				tread->wait();
 		});
 
 	m_avatarChoose->showMaximized();

@@ -1,6 +1,5 @@
 #pragma once
 #include "Dao/UserDao.h"
-
 class UserService :public Singleton<UserService>
 {
 	friend class Singleton<UserService>;
@@ -13,7 +12,7 @@ public:
 	bool register_user(const QString& account, const QString& password );
 	bool modify_password(const QString& account, const QString& new_password );
 	bool modify_nickName(const QString& nick_name );
-	bool modify_avatar(const QString& avatar );
+	bool modify_avatar(qint32 id, const QByteArray& data, const QString& format = "jpg");
 	bool modify_dateBirth(const QString& date_birth );
 	bool modify_gender(const QString& gender );
 	bool modify_phoneNumber(const QString& phone_number );

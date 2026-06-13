@@ -14,6 +14,8 @@ public:
 	void setValue(const QAnyStringView& key, const QVariant& value);
     QVariant getValue(const QAnyStringView& key);
 	QVariant getValue(const QAnyStringView& key, const QVariant& defaultValue);
+
+	QString profilePath() const;
 	bool contains( QAnyStringView key);
 	void remove(QAnyStringView key);
 private:

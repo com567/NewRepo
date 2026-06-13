@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(ui->Loginpage, &LoginPage::sig_login_finished, this, 
 		[this] {
 			ui->stackedWidget->setCurrentWidget(ui->HomePageContainer);
+			ui->Homepage->AvatarChanged();
 			emit sig_login_success();
 		});
 

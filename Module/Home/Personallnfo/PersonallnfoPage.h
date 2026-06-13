@@ -2,6 +2,7 @@
 #include "Common/Widgets/AvatarChoose/AvatarChoose.h"
 #include "Common/Notify/NotifyTipManager.h"
 #include "ui_PersonallnfoPage.h"
+#include "Common/Config/Config.h"
 #include "ContextHolder.h"
 #include <QWidget>
 struct User;
@@ -18,7 +19,6 @@ public:
 	PersonallnfoPage(QWidget *parent = nullptr);
 	~PersonallnfoPage();
 	void setUser(std::shared_ptr<User>user);
-	void setAvatarPath(const QString& icon);
 	void setAvatar(const QPixmap& pix);
 	void setNickName(const QString& nick_name);
 	void setGender(const qint8& gender);
@@ -27,6 +27,8 @@ public:
 
 public slots:
 	void on_avatar_clicked();
+signals:
+	void sig_avatar_update(const QPixmap&);
 protected:
 	void resizeEvent(QResizeEvent *event) override;
 private:

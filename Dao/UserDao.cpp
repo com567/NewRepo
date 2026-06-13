@@ -2,6 +2,7 @@
 #include "DatabaseMap.h"
 #include "Common/Utils/CaptchaMaker.h"
 #include <QDateTime>
+#include <QSqlError>
 UserDao::UserDao()
 {}
 
@@ -45,6 +46,7 @@ std::shared_ptr<User> UserDao::searchNick_name(const QString& nickname, const QS
     return user;
 }
 
+
 bool UserDao::register_user(const QString& account, const QString& password, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
@@ -76,13 +78,12 @@ bool UserDao::modify_password(const QString& account, const QString& new_passwor
     return true;
 }
 
-bool UserDao::modify_nickName(const QString& nick_name, const QSqlDatabase& con)
+bool UserDao::modify_nickName(qint32 id,const QString& nick_name, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    auto user = ContextHolder::instance()->getSelf();
     query.prepare("UPDATE Taoist_temple_user SET nick_name = ? WHERE id = ?");
     query.bindValue(0, nick_name);
-    query.bindValue(1, user->id);
+    query.bindValue(1, id);
     if (!query.exec()) {
         qDebug() << query.lastError();
         return false;
@@ -90,13 +91,13 @@ bool UserDao::modify_nickName(const QString& nick_name, const QSqlDatabase& con)
     return true;
 }
 
-bool UserDao::modify_avatar(const QString& avatar, const QSqlDatabase& con)
+bool UserDao::modify_avatar(qint32 id,const QString& avatar, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    auto user = ContextHolder::instance()->getSelf();
+
     query.prepare("UPDATE Taoist_temple_user SET avatar = ? WHERE id = ?");
     query.bindValue(0, avatar);
-    query.bindValue(1, user->id);
+    query.bindValue(1, id);
     if (!query.exec()) {
         qDebug() << query.lastError();
         return false;
@@ -104,13 +105,13 @@ bool UserDao::modify_avatar(const QString& avatar, const QSqlDatabase& con)
     return true;
 }
 
-bool UserDao::modify_dateBirth(const QString& date_birth, const QSqlDatabase& con)
+bool UserDao::modify_dateBirth(qint32 id,const QString& date_birth, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    auto user = ContextHolder::instance()->getSelf();
+
     query.prepare("UPDATE Taoist_temple_user SET date_birth = ? WHERE id = ?");
     query.bindValue(0, date_birth);
-    query.bindValue(1, user->id);
+    query.bindValue(1, id);
     if (!query.exec()) {
         qDebug() << query.lastError();
         return false;
@@ -118,13 +119,13 @@ bool UserDao::modify_dateBirth(const QString& date_birth, const QSqlDatabase& co
     return true;
 }
 
-bool UserDao::modify_gender(const QString& gender, const QSqlDatabase& con)
+bool UserDao::modify_gender(qint32 id,const QString& gender, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    auto user = ContextHolder::instance()->getSelf();
+
     query.prepare("UPDATE Taoist_temple_user SET gender = ? WHERE id = ?");
     query.bindValue(0, gender);
-    query.bindValue(1, user->id);
+    query.bindValue(1, id);
     if (!query.exec()) {
         qDebug() << query.lastError();
         return false;
@@ -132,13 +133,13 @@ bool UserDao::modify_gender(const QString& gender, const QSqlDatabase& con)
     return true;
 }
 
-bool UserDao::modify_phoneNumber(const QString& phone_number, const QSqlDatabase& con)
+bool UserDao::modify_phoneNumber(qint32 id,const QString& phone_number, const QSqlDatabase& con)
 {
     QSqlQuery query(con);
-    auto user = ContextHolder::instance()->getSelf();
+
     query.prepare("UPDATE Taoist_temple_user SET phone_number = ? WHERE id = ?");
     query.bindValue(0, phone_number);
-    query.bindValue(1, user->id);
+    query.bindValue(1, id);
     if (!query.exec()) {
         qDebug() << query.lastError();
         return false;

@@ -22,7 +22,6 @@ public slots:
 
 signals:
 	void sig_avatar_affirm(QPixmap&);
-	void sig_avatar_path(QString&);
 
 protected:
 	void resizeEvent(QResizeEvent* event) override;
@@ -30,7 +29,7 @@ protected:
 private:
 	
 	Ui::AvatarChooseClass *ui;
-	QString m_path{ContextHolder::instance()->getSelf()->avatar};
+	//QString m_path{ContextHolder::instance()->getSelf()->avatar};
 	float m_ratio;
 };
 

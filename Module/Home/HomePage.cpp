@@ -1,4 +1,4 @@
-#include "PersonallnfoPage.h"
+#include "Personallnfo/PersonallnfoPage.h"
 #include "MainWindow.h"
 #include <QMenu>
 HomePage::HomePage(QWidget *parent)
@@ -8,7 +8,6 @@ HomePage::HomePage(QWidget *parent)
 	ui->setupUi(this);
 	setAttribute(Qt::WA_StyledBackground);
 	ui->Content->setCurrentWidget(ui->mainpage);
-    //AvatarChanged();
 	NotifyTipManager::instance()->setViewPort(this);
 	initPersonalMenu();
 	connect(ui->Head_portrait, &ClickLabel::enter, this, [this]() {
@@ -29,9 +28,20 @@ HomePage::~HomePage()
 
 void HomePage::AvatarChanged()
 {
-	if(ContextHolder::instance()->getSelf()->avatar.isNull())
+	auto user=ContextHolder::instance()->getSelf();
+	if(!user||user->avatar.isEmpty())
 		ui->Head_portrait->setPixmap(QPixmap(":/Resources/man.jpg"));
-	ui->Head_portrait->setPixmap(QPixmap(ContextHolder::instance()->getSelf()->avatar));
+	else {
+		auto path=Config::instance()->profilePath()+"/"+user->avatar;
+		ui->Head_portrait->setPixmap(QPixmap(path));
+	}
+	
+	ui->Head_portrait->setScaledContents(true);
+}
+
+void HomePage::resizeEvent(QResizeEvent* event)
+{
+	ui->Head_portrait->setFixedSize(80, 80);
 }
 
 void HomePage::initPersonalMenu()
@@ -41,7 +51,12 @@ void HomePage::initPersonalMenu()
 	m_personalMenu->setFixedSize(250, 135);
 	m_personalMenu->addSeparator();
 	m_personalMenu->addAction("个人中心", [this] {
-		auto personallnfoPage = new PersonallnfoPage();
+		auto personallnfoPage = new PersonallnfoPage;
+		connect(personallnfoPage, &PersonallnfoPage::sig_avatar_update, this, [this](const QPixmap& pixmap)
+			{
+				ui->Head_portrait->setPixmap(pixmap);
+				ui->Head_portrait->setScaledContents(true);
+			});
 		personallnfoPage->showMaximized();
 		});
 	m_personalMenu->addSeparator();
