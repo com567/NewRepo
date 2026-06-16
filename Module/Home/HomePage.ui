@@ -48,7 +48,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QWidget" name="NavBar" native="true">
+       <widget class="Navigation" name="NavBar" native="true">
         <property name="minimumSize">
          <size>
           <width>251</width>
@@ -75,103 +75,6 @@ background-color: rgb(236, 236, 236);
 }
 </string>
         </property>
-        <widget class="QPushButton" name="pushButton">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>160</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>200</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>240</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>280</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>320</y>
-           <width>251</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>231</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(85, 170, 255);</string>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;道 观 管 理 系 统&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_4">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>120</y>
-           <width>51</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;服   务&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
        </widget>
       </item>
       <item>
@@ -223,7 +126,7 @@ background-color: rgb(236, 236, 236);
            </property>
            <property name="styleSheet">
             <string notr="true">#RightBar{
-border-bottom:1px solid rgb(220,223,230);
+border-bottom:2px solid rgb(236, 236, 236);
 background-color: rgb(255, 255, 255);
 }</string>
            </property>
@@ -313,6 +216,12 @@ background-color: rgb(255, 255, 255);
    <class>ClickLabel</class>
    <extends>QLabel</extends>
    <header>Common/Widgets/ClickLabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Navigation</class>
+   <extends>QWidget</extends>
+   <header>Common/Widgets/NavigationMenu/Navigation.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

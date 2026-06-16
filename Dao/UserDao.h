@@ -1,7 +1,7 @@
 #pragma once
 #include "Common/Base/Singleton.hpp"
 #include "SqlConnection.hpp"
-#include "Entity/User.hpp"
+#include "Domain/Entity/User.hpp"
 #include <QSqlDatabase>
 #include <QSqlQuery>
 class UserDao : public Singleton<UserDao>

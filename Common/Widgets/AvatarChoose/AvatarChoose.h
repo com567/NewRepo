@@ -2,7 +2,7 @@
 
 #include <QWidget>
 #include "ContextHolder.h"
-#include "Entity/User.hpp"
+#include "Domain/Entity/User.hpp"
 #include "ui_AvatarChoose.h"
 
 QT_BEGIN_NAMESPACE

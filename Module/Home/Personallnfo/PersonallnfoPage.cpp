@@ -1,7 +1,7 @@
 #include "Service/UserService.h"
 #include "Common/Utils/Utils.h"
 #include "PersonallnfoPage.h"
-#include "Entity/User.hpp"
+#include "Domain/Entity/User.hpp"
 #include <QCalendarWidget>
 #include <QPainter>
 #include <QBuffer>

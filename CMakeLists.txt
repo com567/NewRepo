@@ -34,6 +34,7 @@ set(PROJECT_SOURCES
     Module/Login/LoginPage.ui
     Module/Login/LoginPage.h
     Module/Login/LoginPage.cpp
+
     Module/Home/HomePage.ui
     Module/Home/HomePage.h
     Module/Home/HomePage.cpp
@@ -46,6 +47,7 @@ set(PROJECT_SOURCES
     Common/Notify/NotifyTipBox.cpp
     Common/Notify/NotifyTipManager.h
     Common/Notify/NotifyTipManager.cpp
+
     Common/Widgets/ClickLabel.h
     Common/Widgets/ClickLabel.cpp
     Common/Widgets/AvatarChoose/AvatarChoose.h
@@ -53,21 +55,28 @@ set(PROJECT_SOURCES
     Common/Widgets/AvatarChoose/AvatarChoose.ui
     Common/Widgets/AvatarChoose/AvatarChooseBox.h
     Common/Widgets/AvatarChoose/AvatarChooseBox.cpp
-
+    Common/Widgets/NavigationMenu/Navigation.cpp
+    Common/Widgets/NavigationMenu/Navigation.h
     Common/Widgets/MsgBox.h
     Common/Widgets/MsgBox.cpp
     Common/Widgets/MsgBox.ui
     Common/Widgets/HoverButton.h
     Common/Widgets/HoverButton.cpp
+
+    Common/Utils/StringUtils.h
+    Common/Utils/StringUtils.cpp
     Common/Utils/CaptchaMaker.h
     Common/Utils/CaptchaMaker.cpp
     Common/Utils/Coating.h
     Common/Utils/Coating.cpp
     Common/Utils/Utils.h
     Common/Utils/Utils.cpp
+
     Common/Config/Config.h
     Common/Config/Config.cpp
 
+    Dao/MenuDao.h
+    Dao/MenuDao.cpp
     Dao/UserDao.h
     Dao/UserDao.cpp
     Dao/DatabaseMap.h
@@ -75,6 +84,8 @@ set(PROJECT_SOURCES
 
     Service/UserService.h
     Service/UserService.cpp
+    Service/MenuService.h
+    Service/MenuService.cpp
     
 )
 

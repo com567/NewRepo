@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include <QtWidgets/QApplication>
+#include "Service/MenuService.h"
 #include <QFile>
 
 int main(int argc, char *argv[])
@@ -11,7 +12,8 @@ int main(int argc, char *argv[])
     }
 
     MainWindow window;
+    MenuService::instance()->GetRouters();
+    //auto menuService = MenuService::instance()->GetMenuTree();
     window.showMaximized();
-    
     return app.exec();
 }
