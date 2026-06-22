@@ -15,12 +15,14 @@ class HomePage : public QWidget
 public:
 	HomePage(QWidget *parent = nullptr);
 	~HomePage();
-
 	void AvatarChanged();
 protected:
 	void resizeEvent(QResizeEvent *event) override;
 signals:
 	void sig_quit_login();
+
+public slots:
+	void onNavigate(const QString& path);
 
 private:
 	Ui::HomePageClass *ui;

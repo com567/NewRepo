@@ -21,10 +21,42 @@ QList<std::shared_ptr<RouterVo>> MenuService::GetRouters()
 
 QList<std::shared_ptr<RouterVo>> MenuService::BuildMenus(const QList<std::shared_ptr<Menu>>& menus)
 {
-	qDebug() << InnerLinkReplaceEach("https://box.iduoyu.net/music/?msclkid=1528703c84041b8889a31a0dc4588d80");
+	//qDebug() << InnerLinkReplaceEach("https://box.iduoyu.net/music/?msclkid=1528703c84041b8889a31a0dc4588d80");
 	//替换后
 	//"box/iduoyu/net/music/?msclkid=1528703c84041b8889a31a0dc4588d80"
-	return QList<std::shared_ptr<RouterVo>>();
+	QList<std::shared_ptr<RouterVo>> routers;
+	for (auto& menu : menus) {
+		auto router = std::make_shared<RouterVo>();
+		router->hidden = (menu->is_visible!=1);
+		router->name= getRouteName(menu);
+		router->path = getRoutePath(menu);
+        router->component = getComponent(menu);
+		router->meta = std::make_shared<MetaVo>(menu->function_name, menu->path);
+		if (menu->children.size() > 0 &&menu->menu_type==UserConstant::TYPE_DIR) {
+			router->rdeirct = UserConstant::NO_REDIRECT;
+			router->children= BuildMenus(menu->children);
+		}
+		else if (is_MenuFrame(menu)) {
+			std::shared_ptr<RouterVo> child=std::make_shared<RouterVo>();
+			child->path = menu->path;
+			child->component = menu->component;
+			child->name = StringUtils::Capitalize_FirstLetter(menu->path);
+            child->meta = std::make_shared<MetaVo>(menu->function_name, menu->path);
+            router->children.append(child);
+		}
+		else if (!is_Externallink(menu)&&menu->parent_id==0) {
+			router->meta= std::make_shared<MetaVo>(menu->function_name, menu->path);
+			router->path = "/";
+			std::shared_ptr<RouterVo> child=std::make_shared<RouterVo>();
+			child->path = InnerLinkReplaceEach(menu->path);
+			child->component = UserConstant::INNER_LINK;
+			child->name = StringUtils::Capitalize_FirstLetter(menu->path);
+			child->meta = std::make_shared<MetaVo>(menu->function_name, menu->path);
+			router->children.append(child);
+		}
+        routers.append(router);
+	}
+	return routers;
 }
 
 QString MenuService::InnerLinkReplaceEach(const QString& path)
@@ -76,12 +108,12 @@ void MenuService::recursionFn(const QList<std::shared_ptr<Menu>>& menus, const s
 	parent->children = children;
 }
 
-std::shared_ptr<Menu> MenuService::getParent(const std::shared_ptr<Menu>& menu)
-{
-	if (!is_Perm(menu))
-		return nullptr;
-	//return MenuDao::instance()->GetMenuById(menu->parent_id);
-}
+//std::shared_ptr<Menu> MenuService::getParent(const std::shared_ptr<Menu>& menu)
+//{
+//	if (!is_Perm(menu))
+//		return nullptr;
+//	//return MenuDao::instance()->GetMenuById(menu->parent_id);
+//}
 
 bool MenuService::is_Perm(const std::shared_ptr<Menu>& parent)
 {
@@ -103,7 +135,7 @@ bool MenuService::is_Child(const QList<std::shared_ptr<Menu>>& menus, const std:
 	return false;
 }
 
-bool MenuService::is_Parent(const std::shared_ptr<Menu>& menu)
+bool MenuService::is_ParentView(const std::shared_ptr<Menu>& menu)
 {
 	return (menu->parent_id != 0&&menu->menu_type==UserConstant::TYPE_DIR);
 }
@@ -117,14 +149,19 @@ bool MenuService::is_Externallink(const std::shared_ptr<Menu>& menu)
 bool MenuService::is_MenuFrame(const std::shared_ptr<Menu>& menu)
 {
 	if (!menu) return false;
-	return (!menu->is_frame && menu->parent_id==0&&menu->menu_type==UserConstant::TYPE_MENU);
+	return (!menu->is_frame&& menu->parent_id == 0 && menu->menu_type == UserConstant::TYPE_MENU);
+}
+
+bool MenuService::is_MenuDir(const std::shared_ptr<Menu>& menu)
+{
+	return (!menu->is_frame && menu->parent_id == 0 && menu->menu_type == UserConstant::TYPE_DIR);
 }
 
 QString MenuService::getRouteName(const std::shared_ptr<Menu>& menu)
 {
 	if (!menu) return QString();
 	auto routeName = StringUtils::Capitalize_FirstLetter(menu->path);
-	if (is_MenuFrame(menu)) {
+	if (is_MenuDir(menu)) {
 		routeName.clear();
 	}
 	return routeName;
@@ -137,7 +174,7 @@ QString MenuService::getRoutePath(const std::shared_ptr<Menu>& menu)
 	if (is_Externallink(menu)&&menu->parent_id!=0) {
 		routePath = InnerLinkReplaceEach(routePath);
 	}
-	else if (!is_Externallink(menu) && is_MenuFrame(menu)) {
+	else if (is_MenuDir(menu)) {
 		routePath = "/"+menu->path;
 	}
 	else
@@ -147,14 +184,13 @@ QString MenuService::getRoutePath(const std::shared_ptr<Menu>& menu)
 
 QString MenuService::getComponent(const std::shared_ptr<Menu>& menu)
 {
-	if(!menu)return UserConstant::LAYOUT;
+	if(!menu||menu->component.isEmpty())return UserConstant::LAYOUT;
 	auto component = menu->component;
-	if(menu->component.isEmpty())return UserConstant::LAYOUT;
-	if (!is_Externallink(menu)&&!is_MenuFrame(menu)) {
-		component = UserConstant::INNER_LINK;
+    if (menu->parent_id!=0&&!is_Externallink(menu)) {
+        component = UserConstant::INNER_LINK;
 	}
-	else if (is_MenuFrame(menu)) {
-        component = UserConstant::PARENT_VIEW;
+	else if (is_ParentView(menu)) {
+		component = UserConstant::PARENT_VIEW;
 	}
 	return component;
 }

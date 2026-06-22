@@ -1,5 +1,7 @@
 #include "Personallnfo/PersonallnfoPage.h"
+#include "Service/MenuService.h"
 #include "MainWindow.h"
+#include <QDesktopServices>
 #include <QMenu>
 HomePage::HomePage(QWidget *parent)
 	: QWidget(parent)
@@ -18,12 +20,51 @@ HomePage::HomePage(QWidget *parent)
 			m_personalMenu->popup(pos);
 		}
 		});
-	
+	ui->NavBar->setRouterVo(MenuService::instance()->GetRouters());
+	connect(ui->NavBar, &Navigation::sigNavigate, this, &HomePage::onNavigate);
 }
 
 HomePage::~HomePage()
 {
 	delete ui;
+}
+
+
+void HomePage::onNavigate(const QString& path)
+{
+	// 外链（以 http(s) 开头）用系统浏览器打开（Navigation 已处理，但这里做保险判断）
+	if (path.startsWith("http://", Qt::CaseInsensitive) || path.startsWith("https://", Qt::CaseInsensitive)) {
+		QDesktopServices::openUrl(QUrl(path));
+		return;
+	}
+	// 规范化路径
+	QString p = path;
+	if (p.isEmpty()) p = "/";
+	if (!p.startsWith("/")) p = "/" + p;
+
+	// 典型映射示例：根据路由 path 切换 stackedWidget 页面
+	// 请根据实际路由命名调整判定条件或改为映射表
+	if (p == "/" || p == "/mainpage") {
+		ui->Content->setCurrentWidget(ui->mainpage);
+		return;
+	}
+	if (p == "/personlinfopage" || p.contains("person")) {
+		ui->Content->setCurrentWidget(ui->personlinfopage);
+		return;
+	}
+
+	// 通用尝试：按 objectName 匹配 stacked widget 的页面（去掉前导 '/')
+	QString name = p.mid(1);
+	for (int i = 0; i < ui->Content->count(); ++i) {
+		QWidget* w = ui->Content->widget(i);
+		if (w && w->objectName() == name) {
+			ui->Content->setCurrentIndex(i);
+			return;
+		}
+	}
+
+	// 兜底：回到主页面
+	ui->Content->setCurrentWidget(ui->mainpage);
 }
 
 void HomePage::AvatarChanged()

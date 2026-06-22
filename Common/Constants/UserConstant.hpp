@@ -7,5 +7,5 @@ struct UserConstant {
     inline static const char* LAYOUT{ "Layout" };
     inline static const char* INNER_LINK{ "InnerLink" };
     inline static const char* PARENT_VIEW{ "ParentView" };
-
+    inline static const char* NO_REDIRECT{ "noRedirect" };
 };

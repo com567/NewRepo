@@ -12,8 +12,7 @@ int main(int argc, char *argv[])
     }
 
     MainWindow window;
-    MenuService::instance()->GetRouters();
-    //auto menuService = MenuService::instance()->GetMenuTree();
     window.showMaximized();
     return app.exec();
 }
+
