@@ -35,6 +35,13 @@ set(PROJECT_SOURCES
     Module/Login/LoginPage.h
     Module/Login/LoginPage.cpp
 
+    Module/FunctionMenu/MenuMgrPage.h
+    Module/FunctionMenu/MenuMgrPage.cpp
+    Module/FunctionMenu/MenuMgrPage.ui
+
+    Module/Home/Home.h
+    Module/Home/Home.cpp
+    Module/Home/Home.ui
     Module/Home/HomePage.ui
     Module/Home/HomePage.h
     Module/Home/HomePage.cpp
@@ -42,6 +49,8 @@ set(PROJECT_SOURCES
     Module/Home/Personallnfo/PersonallnfoPage.h
     Module/Home/Personallnfo/PersonallnfoPage.cpp
     
+    Common/Delegate/NavTreeDelegate.h
+    Common/Delegate/NavTreeDelegate.cpp
 
     Common/Notify/NotifyTipBox.h
     Common/Notify/NotifyTipBox.cpp
@@ -60,6 +69,8 @@ set(PROJECT_SOURCES
     Common/Widgets/MsgBox.h
     Common/Widgets/MsgBox.cpp
     Common/Widgets/MsgBox.ui
+    Common/Widgets/ComboBox.h
+    Common/Widgets/ComboBox.cpp
     Common/Widgets/HoverButton.h
     Common/Widgets/HoverButton.cpp
 

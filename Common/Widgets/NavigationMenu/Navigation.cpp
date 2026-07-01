@@ -1,7 +1,10 @@
 #include "Common/Constants/UserConstant.hpp"
+#include "Common/Utils/Utils.h"
 #include "Navigation.h"
 #include <QDesktopServices>
 #include <QHeaderView>
+#include <QStandardItem>
+#include <QTimer>
 #include <QUrl>
 Navigation::Navigation(QWidget *parent)
 	: QTreeView(parent)
@@ -11,7 +14,7 @@ Navigation::Navigation(QWidget *parent)
 	setModel(m_model);
     setAnimated(true);
     setEditTriggers(QAbstractItemView::NoEditTriggers);
-
+    connect(this, &QTreeView::clicked, this, &Navigation::slot_clicked);
     m_model->setHorizontalHeaderLabels(QStringList() << "道 观 管 理 系 统");
     QFont headerFont;// 保证表头可见并设置固定高度
     headerFont.setPointSize(18); if (header()) {
@@ -19,13 +22,47 @@ Navigation::Navigation(QWidget *parent)
         m_model->setHeaderData(0, Qt::Horizontal, QBrush(QColor(55, 187, 240)), Qt::ForegroundRole);    //文字居中
         header()->setDefaultAlignment(Qt::AlignCenter);
     }
+    //通过委托来绘制导航树
+    
     // setUniformRowHeights(true); // 优化并强制统一行高
 
-    connect(this, &QTreeView::clicked, this, &Navigation::onItemClicked);
+    //connect(this, &QTreeView::clicked, this, &Navigation::onItemClicked);
 }
 
 Navigation::~Navigation()
 {}
+
+QStandardItem* createItem(const std::shared_ptr<RouterVo>& router) {
+    QStandardItem* item = new QStandardItem(router->meta->title);
+    item->setData(QVariant::fromValue(router), Qt::UserRole);
+    if (router->rdeirct== UserConstant::NO_REDIRECT) {
+        item->setSelectable(false);
+    }
+    return item;
+}
+
+QStringList Navigation::getNavigationList() const
+{
+    QStringList list;
+
+    auto index = currentIndex();
+    while (index.isValid()) {
+        list.prepend(index.data(Qt::DisplayRole).toString());
+        index = index.parent();
+    }
+
+    return list;
+}
+
+void Navigation::setCurrentNavigation(const QString& name)
+{
+    auto items = m_model->findItems(name, Qt::MatchFlag::MatchRecursive);
+    if (items.isEmpty()) {
+        qWarning() << "name is " << name << " nav not foun!";
+        return;
+    }
+    setCurrentIndex(items.first()->index());
+}
 
 template<typename T>
 void recursionFn(const QList<std::shared_ptr<RouterVo>>& routers, T* parentItem) {
@@ -51,9 +88,9 @@ void recursionFn(const QList<std::shared_ptr<RouterVo>>& routers, T* parentItem)
         auto item = new QStandardItem(router->name);
         item= makeItem(router->meta->title);
         item->setData(QVariant::fromValue(router),Qt::UserRole );
-        /*if (router->rdeirct == UserConstant::NO_REDIRECT) {
+        if (router->rdeirct == UserConstant::NO_REDIRECT) {
             item->setSelectable(false);
-        }*/
+        }
 
         recursionFn(router->children, item);
         parentItem->appendRow(item);
@@ -63,6 +100,7 @@ void recursionFn(const QList<std::shared_ptr<RouterVo>>& routers, T* parentItem)
 void Navigation::setRouterVo(const QList<std::shared_ptr<RouterVo>>&routers)
 {
     if (routers.isEmpty()) {
+        qDebug() << "routers is empty";
         return;
     }
     
@@ -70,37 +108,91 @@ void Navigation::setRouterVo(const QList<std::shared_ptr<RouterVo>>&routers)
     recursionFn(routers, m_model);
 }
 
-
-// 点击处理：优先判断 meta.link 是否为外部链接，外链用系统浏览器打开；否则发出内部跳转信号
-void Navigation::onItemClicked(const QModelIndex& index)
+void Navigation::autoExpanded(const QModelIndex& index)
 {
-    if (!index.isValid()) return;
-    QStandardItem* item = m_model->itemFromIndex(index);
-    if (!item) return;
+    //展开或关闭	
+    setExpanded(index, !isExpanded(index));
 
-    QString link = item->data(Qt::UserRole + 1).toString();
-    if (link.startsWith("http://", Qt::CaseInsensitive) || link.startsWith("https://", Qt::CaseInsensitive)) {
-        QDesktopServices::openUrl(QUrl(link));
-        return;
-    }
+    //关闭其他的
+    QTimer::singleShot(100, [this, index] {
+        for (int i = 0; i < m_model->rowCount(); i++) {
+            auto idx = m_model->index(i, 0);
 
-    // 非外链，发出内部路由跳转（link 可能以 '/' 开头，若为空可用 item 文本或其它 data）
-    if (!link.isEmpty()) {
-        emit sigNavigate(link);
-    }
-    else {
-        // 如果没有 link，尝试用 item 存的 RouterVo（若已注册并可取出）
-        QVariant v = item->data(Qt::UserRole);
-        if (v.isValid()) {
-            auto routerPtr = v.value<std::shared_ptr<RouterVo>>();
-            if (routerPtr) {
-                // 使用 router->path 或 meta->link 作为内部路由
-                QString path = routerPtr->meta ? routerPtr->meta->link : routerPtr->path;
-                if (!path.isEmpty()) emit sigNavigate(path);
+            //idx是不是index的父级别
+            bool isP = Utils::isParent(index, idx);
+            if (isP) {
+                continue;
+            }
+
+            //如果有效并且是展开的，而且不是当前操作的
+            if (idx.isValid() && isExpanded(idx) && idx != index) {
+                setExpanded(idx, false);
+                break;
+            }
+        }
+        });
+}
+
+void Navigation::slot_clicked(const QModelIndex& index) {
+    //如果是顶级Item
+    if (!index.parent().isValid()) {
+        //有子Item
+        if (m_model->itemFromIndex(index)->hasChildren()) {
+            autoExpanded(index);
+        }
+        //没有孩子
+        else {
+            auto text = index.data(Qt::DisplayRole).toString();
+            if (text == "首页") {
+                emit navigationChanged({});
             }
         }
     }
+    //是子item
+    else {
+        //有子Item
+        if (m_model->itemFromIndex(index)->hasChildren()) {
+            autoExpanded(index);
+        }
+        else {
+            emit navigationChanged(getNavigationList());
+        }
+    }
+
 }
+
+
+
+// 点击处理：优先判断 meta.link 是否为外部链接，外链用系统浏览器打开；否则发出内部跳转信号
+//void Navigation::onItemClicked(const QModelIndex& index)
+//{
+//    if (!index.isValid()) return;
+//    QStandardItem* item = m_model->itemFromIndex(index);
+//    if (!item) return;
+//
+//    QString link = item->data(Qt::UserRole + 1).toString();
+//    if (link.startsWith("http://", Qt::CaseInsensitive) || link.startsWith("https://", Qt::CaseInsensitive)) {
+//        QDesktopServices::openUrl(QUrl(link));
+//        return;
+//    }
+//
+//    // 非外链，发出内部路由跳转（link 可能以 '/' 开头，若为空可用 item 文本或其它 data）
+//    if (!link.isEmpty()) {
+//        emit sigNavigate(link);
+//    }
+//    else {
+//        // 如果没有 link，尝试用 item 存的 RouterVo（若已注册并可取出）
+//        QVariant v = item->data(Qt::UserRole);
+//        if (v.isValid()) {
+//            auto routerPtr = v.value<std::shared_ptr<RouterVo>>();
+//            if (routerPtr) {
+//                // 使用 router->path 或 meta->link 作为内部路由
+//                QString path = routerPtr->meta ? routerPtr->meta->link : routerPtr->path;
+//                if (!path.isEmpty()) emit sigNavigate(path);
+//            }
+//        }
+//    }
+//}
 
 
 

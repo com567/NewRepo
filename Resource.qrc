@@ -18,5 +18,7 @@
         <file>Resources/reduce.svg</file>
         <file>Resources/transparent.png</file>
         <file>Resources/tailor.svg</file>
+        <file>Resources/Search.svg</file>
+        <file>Resources/search_.svg</file>
     </qresource>
 </RCC>

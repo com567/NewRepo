@@ -1,6 +1,7 @@
 #include "Utils.h"
 #include <QGraphicsDropShadowEffect>
 #include <QPainterPath>
+#include <QModelIndex>
 #include <QPainter>
 
 void Utils::setDropShadow(QWidget* widget)
@@ -14,9 +15,29 @@ void Utils::setDropShadow(QWidget* widget)
     widget->setGraphicsEffect(shadow);
 }
 
-QPixmap Utils::toRoundPixmap(const QPixmap& pixmap, int radius)
+bool Utils::isParent(const QModelIndex& child, const QModelIndex& parent)
 {
-	return QPixmap();
+	if (child.isValid())
+		return false;
+	auto parentIndex = child.parent();
+	while (parentIndex.isValid()) {
+		if (parent == parentIndex) {
+			return true;
+		}
+		parentIndex = parentIndex.parent();
+	}
+	return false;
+}
+
+int Utils::parentCount(const QModelIndex& index)
+{
+	int count = 0;
+	auto parentIndex = index.parent();
+	while (parentIndex.isValid()) {
+		++count;
+		parentIndex = parentIndex.parent();
+	}
+	return count;
 }
 
 Utils::Utils()

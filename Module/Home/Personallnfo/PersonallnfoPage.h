@@ -33,7 +33,7 @@ protected:
 	void resizeEvent(QResizeEvent *event) override;
 private:
 	Ui::PersonallnfoPageClass *ui;
-	AvatarChoose*m_avatarChoose;
+	AvatarChoose* m_avatarChoose{nullptr};
     void birthWidget();
     QWidget*phoneWidget();
 };

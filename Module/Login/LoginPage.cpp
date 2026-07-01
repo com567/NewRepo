@@ -1,8 +1,8 @@
 #include "Common/Widgets/ClickLabel.h"
+#include "Common/Utils/StringUtils.h"
 #include "Common/Widgets/MsgBox.h"
 #include "ContextHolder.h"
 #include "MainWindow.h"
-#include <QRegularExpression>
 #include <QPainter>
 
 
@@ -134,8 +134,7 @@ void LoginPage::on_RegBtn1_clicked()
         
 
      //密码不能少于8位，且必须包含数字和大小写字母
-     else if (new_used_password.first.size() < 8 || !new_used_password.first.contains(QRegularExpression("[0-9]")) ||
-         !new_used_password.first.contains(QRegularExpression("[a-zA-Z]"))) {
+     else if (!StringUtils::is_Password(new_used_password.first)) {
          NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
          return;
      }
@@ -184,8 +183,7 @@ void LoginPage::on_affirm_clicked()
 
      }
      //密码不能少于8位，且必须包含数字和大小写字母
-     else if (new_used_password.first.size() < 8 || !new_used_password.first.contains(QRegularExpression("[0-9]")) ||
-         !new_used_password.first.contains(QRegularExpression("[a-zA-Z]"))) {
+     else if (!StringUtils::is_Password(new_used_password.first)) {
           NotifyTipManager::instance()->addNotifyTip(NotifyTipBox::Message_type::Password_invalid);
           return;
 

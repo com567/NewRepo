@@ -6,5 +6,6 @@ class StringUtils
 public:
 	static bool is_HttpUrl(const QString& url);
 	static QString Capitalize_FirstLetter(const QString& str);
+	static bool is_Password(const QString& str);
 };
 

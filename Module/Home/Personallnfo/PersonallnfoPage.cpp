@@ -12,6 +12,7 @@ PersonallnfoPage::PersonallnfoPage(QWidget* parent)
 	, ui(new Ui::PersonallnfoPageClass())
 {
 	ui->setupUi(this);
+	//qDebug() << __FUNCTION__;
 	Utils::setDropShadow(this);
 	NotifyTipManager::instance()->setViewPort(ui->Function_zone);
 
@@ -126,7 +127,9 @@ void PersonallnfoPage::resizeEvent(QResizeEvent* event)
 
 
 void PersonallnfoPage::on_avatar_clicked() {
-	
+	if (m_avatarChoose) {
+        m_avatarChoose->close();
+	}
 	m_avatarChoose=new AvatarChoose(this);
 	auto user = ContextHolder::instance()->getSelf();
 	if(!user||m_avatarChoose==nullptr)return;

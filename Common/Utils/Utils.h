@@ -7,8 +7,17 @@ class Utils
 public:
 	static void setDropShadow(QWidget* widget);
 
-	QPixmap toRoundPixmap(const QPixmap& pixmap, int radius=-1);
-	//在编译期把字符串转为整形常量
+	/*
+	 * 判断parent是不是child的父项(直接或间接父项).
+	 */
+	static bool isParent(const QModelIndex& child, const QModelIndex& parent);
+
+	/*
+	 * 获取index的父项数量.
+	 */
+	static int  parentCount(const QModelIndex& index);
+
+	//在编译期把字符串转为唯一哈希值
 	static constexpr unsigned int OptionHash(const char* str, int h = 0) {
         return !str[h] ? 5381 : (OptionHash(str,h +1)*33)^str[h];
 	}
